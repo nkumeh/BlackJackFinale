@@ -9,7 +9,8 @@ Note: I set up this project with Java 15 and Gradle.
 As a team, we agree to:
 - Include things like testing, branching, etc. 
 - When we will get drafts done
-- Testing Style, etc. 
+- Testing Style, etc.
+- Meet weekly to discuss progress
 
 ## Repository Set Up
 [Clone this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) to your computer. 
