@@ -5,6 +5,17 @@ This project uses the requirements from [Programming Assignment 8](https://docs.
 Note: I set up this project with Java 15 and Gradle.
 ## Group Agreements
 
+#### Friday, March 12, 2021 - Meeting Deadlines
+- **Saturday, March 13, 2021**: Alex
+  - Card - class w/ tests
+  - Enum - for suit and name
+- **Monday, March 15, 2021**: Kristine
+  - Deck - Methods print, shuffle, add, remove
+  - Deck - tests
+- **Wednesday, March 17, 2021**: Maria
+  - Deck - sort w/ tests
+  - Hand - implementation, tests, main
+
 
 As a team, we agree to:
 - Include things like testing, branching, etc. 
