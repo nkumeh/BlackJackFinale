@@ -54,15 +54,29 @@ public class Card {
         return name;
     }
 
+    /**
+     * Boolean method that returns if card is an ACE. Can be used in
+     * blackjack game for readability purposes to treat ACE as value 1 or 11.
+     * @return boolean - true if ACE, false otherwise
+     */
     public boolean isAce() {
         return this.name == Name.ACE;
     }
 
+    /**
+     * toString method for Card.
+     * @return String e.g. TWO of HEARTS, ACE of CLUBS
+     */
     @Override
     public String toString() {
         return name + " of " + suit;
     }
 
+    /**
+     * Equals method for Card.
+     * @param o another object
+     * @return True if suit and name are both equal, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass())
@@ -70,12 +84,4 @@ public class Card {
         Card card = (Card) o;
         return suit == card.suit && name == card.name;
     }
-
-
-    public static void main(String[] args) {
-        Card myCard = new Card(Suit.CLUBS, Name.ACE);
-        System.out.println(myCard.isAce());
-        System.out.println(myCard.name.getBlackjackValue());
-    }
-
 }
