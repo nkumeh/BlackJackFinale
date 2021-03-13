@@ -3,7 +3,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test class for enum Name.
+ * A JUnit4 test class for enum Name.
  */
 public class NameTest {
 
