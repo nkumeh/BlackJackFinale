@@ -24,4 +24,22 @@ public class NameTest {
         assertEquals(11, Name.ACE.getBlackjackValue());
     }
 
+    @Test
+    public void getLabel() {
+        assertEquals("Two", Name.TWO.getLabel());
+        assertEquals("Three", Name.THREE.getLabel());
+        assertEquals("Four", Name.FOUR.getLabel());
+        assertEquals("Five", Name.FIVE.getLabel());
+        assertEquals("Six", Name.SIX.getLabel());
+        assertEquals("Seven", Name.SEVEN.getLabel());
+        assertEquals("Eight", Name.EIGHT.getLabel());
+        assertEquals("Nine", Name.NINE.getLabel());
+        assertEquals("Ten", Name.TEN.getLabel());
+        assertEquals("Jack", Name.JACK.getLabel());
+        assertEquals("Queen", Name.QUEEN.getLabel());
+        assertEquals("King", Name.KING.getLabel());
+        assertEquals("Ace", Name.ACE.getLabel());
+    }
+
+
 }

@@ -4,28 +4,31 @@
  * default value as 11. However, it can also be a 1.
  */
 public enum Name {
-    TWO(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6),
-    SEVEN(7),
-    EIGHT(8),
-    NINE(9),
-    TEN(10),
-    JACK(10),
-    QUEEN(10),
-    KING(10),
-    ACE(11);
+    TWO(2, "Two"),
+    THREE(3, "Three"),
+    FOUR(4, "Four"),
+    FIVE(5, "Five"),
+    SIX(6, "Six"),
+    SEVEN(7, "Seven"),
+    EIGHT(8, "Eight"),
+    NINE(9, "Nine"),
+    TEN(10, "Ten"),
+    JACK(10, "Jack"),
+    QUEEN(10, "Queen"),
+    KING(10, "King"),
+    ACE(11, "Ace");
 
     private final int blackjackValue;
+    private final String label;
 
     /**
      * Constructor for Name enum. Takes blackjack card values as constants.
      * @param value int representing card value
+     * @param label String representing label
      */
-    Name(int value) {
+    Name(int value, String label) {
         this.blackjackValue = value;
+        this.label = label;
     }
 
     /**
@@ -34,5 +37,13 @@ public enum Name {
      */
     public int getBlackjackValue() {
         return this.blackjackValue;
+    }
+
+    /**
+     * Getter for label
+     * @return string representing label
+     */
+    public String getLabel() {
+        return this.label;
     }
 }

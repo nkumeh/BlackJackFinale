@@ -16,8 +16,8 @@ public class Card {
      * @param name enum Name - TWO-TEN, face cards JACK, QUEEN, KING, and ACE
      */
     public Card(Suit suit, Name name) {
-        setSuit(suit);
-        setName(name);
+        this.setSuit(suit);
+        this.setName(name);
     }
 
     /**
@@ -43,7 +43,7 @@ public class Card {
      * @return enum Suit - Clubs, Diamonds, Hearts, Spades
      */
     public Suit getSuit() {
-        return suit;
+        return this.suit;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Card {
      * @return enum Name - TWO-TEN, face cards JACK, QUEEN, KING, and ACE
      */
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -69,7 +69,7 @@ public class Card {
      */
     @Override
     public String toString() {
-        return name + " of " + suit;
+        return this.name.getLabel() + " of " + this.suit.getLabel();
     }
 
     /**
@@ -79,9 +79,9 @@ public class Card {
      */
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass())
+        if (o == null || this.getClass() != o.getClass())
             return false;
         Card card = (Card) o;
-        return suit == card.suit && name == card.name;
+        return this.suit == card.suit && this.name == card.name;
     }
 }

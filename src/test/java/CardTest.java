@@ -11,12 +11,14 @@ public class CardTest {
     private Card aceOfClubs;
     private Card twoOfHearts;
     private Card aceOfSpades;
+    private Card jackOfDiamonds;
 
     @Before
     public void setUp() {
         aceOfClubs = new Card(Suit.CLUBS, Name.ACE);
         twoOfHearts = new Card(Suit.HEARTS, Name.TWO);
         aceOfSpades = new Card(Suit.SPADES, Name.ACE);
+        jackOfDiamonds = new Card(Suit.DIAMONDS, Name.JACK);
     }
 
     @Test
@@ -24,6 +26,7 @@ public class CardTest {
         assertEquals(Suit.CLUBS, aceOfClubs.getSuit());
         assertEquals(Suit.HEARTS, twoOfHearts.getSuit());
         assertEquals(Suit.SPADES, aceOfSpades.getSuit());
+        assertEquals(Suit.DIAMONDS, jackOfDiamonds.getSuit());
     }
 
     @Test
@@ -31,6 +34,7 @@ public class CardTest {
         assertEquals(Name.ACE, aceOfClubs.getName());
         assertEquals(Name.TWO, twoOfHearts.getName());
         assertEquals(Name.ACE, aceOfSpades.getName());
+        assertEquals(Name.JACK, jackOfDiamonds.getName());
     }
 
     @Test
@@ -41,9 +45,10 @@ public class CardTest {
 
     @Test
     public void testToString() {
-        assertEquals("ACE of CLUBS", aceOfClubs.toString());
-        assertEquals("TWO of HEARTS", twoOfHearts.toString());
-        assertEquals("ACE of SPADES", aceOfSpades.toString());
+        assertEquals("Ace of Clubs", aceOfClubs.toString());
+        assertEquals("Two of Hearts", twoOfHearts.toString());
+        assertEquals("Ace of Spades", aceOfSpades.toString());
+        assertEquals("Jack of Diamonds", jackOfDiamonds.toString());
     }
 
     @Test
