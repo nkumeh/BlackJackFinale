@@ -44,7 +44,7 @@ public class Deck {
     /**
      * This method is used for testing. Currently package private
      * because I'm not sure it needs greater visibility than that.
-     * @return an array of the
+     * @return an ArrayList of the cards in the deck. 
      */
     ArrayList<Card> getDeck() {
         ArrayList<Card> deckCopy = new ArrayList<>(deck);
