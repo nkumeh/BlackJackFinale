@@ -14,14 +14,6 @@ public class DeckTest {
         deck1 = new Deck();
     }
 
-    /**
-     * Tests that getDeck returns a new Array object than the original.
-     */
-    @Test
-    public void testGetDeckReturnsNewObject() {
-        ArrayList<Card> returnedDeck = deck1.getDeck();
-        assertNotSame(deck1, returnedDeck);
-    }
 
     /**
      * This test checks that the sort function ordering of the Deck is as expected.
@@ -29,7 +21,6 @@ public class DeckTest {
      */
     @Test
     public void testSortOnFullDeck() {
-        Deck sortedDeck = new Deck();
         String sortedDeckAsString = "[Two of Clubs, Two of Diamonds, Two of Hearts, Two of Spades, " +
                 "Three of Clubs, Three of Diamonds, Three of Hearts, Three of Spades, " +
                 "Four of Clubs, Four of Diamonds, Four of Hearts, Four of Spades, " +
@@ -57,7 +48,7 @@ public class DeckTest {
         comparisonDeck.add(new Card(Suit.CLUBS, Name.THREE));
         comparisonDeck.add(new Card(Suit.HEARTS, Name.JACK));
         comparisonDeck.add(new Card(Suit.SPADES, Name.ACE));
-        
+
         Deck partialDeck = new Deck(comparisonDeck);
         String expectedSortedResult = "['Two of Diamonds', 'Three of Clubs', 'Jack of Hearts', 'Ace of Spades']";
         partialDeck.sort();
