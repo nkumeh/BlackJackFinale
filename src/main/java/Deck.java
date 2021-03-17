@@ -44,7 +44,7 @@ public class Deck {
     /**
      * This method is used for testing. Currently package private
      * because I'm not sure it needs greater visibility than that.
-     * @return an ArrayList of the cards in the deck. 
+     * @return an ArrayList of the cards in the deck.
      */
     ArrayList<Card> getDeck() {
         ArrayList<Card> deckCopy = new ArrayList<>(deck);
@@ -87,10 +87,10 @@ public class Deck {
         if (isEmpty()) {
             throw new IllegalStateException("Cannot sort an empty Deck");
         }
-        Comparator<Card> compareByValueAndSuit = Comparator
+        Comparator<Card> compareByNameAndSuit = Comparator
                 .comparing(Card::getName)
                 .thenComparing(Card::getSuit);
-        Collections.sort(deck, compareByValueAndSuit);
+        Collections.sort(deck, compareByNameAndSuit);
     }
 
     /**

@@ -57,7 +57,7 @@ public class DeckTest {
         comparisonDeck.add(new Card(Suit.CLUBS, Name.THREE));
         comparisonDeck.add(new Card(Suit.HEARTS, Name.JACK));
         comparisonDeck.add(new Card(Suit.SPADES, Name.ACE));
-
+        
         Deck partialDeck = new Deck(comparisonDeck);
         String expectedSortedResult = "['Two of Diamonds', 'Three of Clubs', 'Jack of Hearts', 'Ace of Spades']";
         partialDeck.sort();
