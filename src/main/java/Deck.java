@@ -61,11 +61,14 @@ public class Deck {
      * @return the card at the requested index
      * @throws IllegalStateException if the deck is empty.
      */
-    public Card getCard(int index) throws IllegalStateException {
-        if (!deck.isEmpty()) {
-            return this.deck.get(index);
+    public Card getCard(int index) throws IndexOutOfBoundsException, IllegalStateException {
+        if (deck.isEmpty()) {
+            throw new IllegalStateException("The deck is empty.");
         }
-        throw new IllegalStateException("The deck is empty.");
+        else if (index >= deck.size()) {
+            throw new IndexOutOfBoundsException("There is no card at that position in the deck.");
+        }
+        return this.deck.get(index);
     }
 
     /**
@@ -114,7 +117,7 @@ public class Deck {
      * @return true if the deck is full
      */
     private boolean isFull() {
-        return this.deck.size() >= MAX_CARDS_IN_DECK;
+        return this.size() >= MAX_CARDS_IN_DECK;
     }
 
     /**
@@ -122,7 +125,7 @@ public class Deck {
      * @return true if the deck is empty
      */
     private boolean isEmpty() {
-        return this.deck.size() == 0;
+        return this.size() == 0;
     }
 
     /**
