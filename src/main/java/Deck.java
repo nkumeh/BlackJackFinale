@@ -59,9 +59,10 @@ public class Deck {
      * This method is used to view the first card stored in the deck
      * @param index the index to return the card from
      * @return the card at the requested index
+     * @throws IndexOutOfBoundsException if the index is out of bounds of the Deck.
      * @throws IllegalStateException if the deck is empty.
      */
-    public Card getCard(int index) throws IndexOutOfBoundsException, IllegalStateException {
+    public Card getCard(int index) throws IllegalStateException, IndexOutOfBoundsException {
         if (deck.isEmpty()) {
             throw new IllegalStateException("The deck is empty.");
         }
