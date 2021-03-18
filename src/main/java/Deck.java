@@ -159,8 +159,18 @@ public class Deck {
         return this.deck.size();
     }
 
+    /**
+     * This is the toString method for the Deck Class.
+     * @return a formatted string of the Array.
+     */
+    public String toString() {
+        return "# of Cards in deck: " + this.size() +
+                "\nDeck Contains: " + this.deck.toString();
+    }
+
     public static void main(String[] args) {
         Deck testDeck = new Deck();
         testDeck.printDeck();
+        System.out.println(testDeck.toString());
     }
 }
