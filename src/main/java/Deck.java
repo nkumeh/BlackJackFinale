@@ -7,7 +7,7 @@ import java.util.Random;
  * creates objects that represent the standard 52 cards.
  */
 public class Deck {
-    private final int MAX_CARDS_IN_DECK = 52;
+    final int MAX_CARDS_IN_DECK = 52;
     private ArrayList<Card> deck;
 
     public Deck() {
