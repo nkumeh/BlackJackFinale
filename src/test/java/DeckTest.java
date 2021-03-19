@@ -55,6 +55,7 @@ public class DeckTest {
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetCardThrowsExceptionForOutOfBoundsIndex() {
         completeDeck.getCard(52);
+        partialDeck.getCard(4);
     }
 
     /**
