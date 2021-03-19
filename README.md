@@ -6,15 +6,37 @@ Note: I set up this project with Java 15 and Gradle.
 ## Group Agreements
 
 #### Friday, March 12, 2021 - Meeting Deadlines
-- **Saturday, March 13, 2021**: Alex
+- [x] **Saturday, March 13, 2021**: Alex
   - Card - class w/ tests
   - Enum - for suit and name
-- **Monday, March 15, 2021**: Kristine
+- [x] **Monday, March 15, 2021**: Kristine
   - Deck - Methods print, shuffle, add, remove
   - Deck - tests
-- **Wednesday, March 17, 2021**: Maria
+- [x] **Wednesday, March 17, 2021**: Maria
   - Deck - sort w/ tests
   - Hand - implementation, tests, main
+    
+#### Monday, March 22, 2021
+- [ ] Player Models: Alex
+  - Fields/Instance Variables: Hand, currentHandValue
+  - Methods: calculateHandValue, Hit, Stand  
+    - [ ] Abstract Class
+    - [ ] Player Class
+    - [ ] Dealer Class  
+    - [ ] Tests for all classes
+
+- [ ] BlackJack Models: Kristine
+  - Fields/Instance Variables: Deck, Dealer, Players (ArrayList), currentPlayer
+  - Methods: prepDeck (create and shuffle), deal hands to players, isGameOver? 
+    (loops through players to see their score and determine if there is a winner).    
+    - [ ] Tests for BlackJack
+  
+#### Wednesday, March 24, 2021  
+- [ ] View + Controller: Maria
+    - Going to design the View interface for the player, including how to represent a 
+      card, hand, and the game status. 
+    - The prompts to get input from the user and send info to the models. 
+    - The controller + take Turn logic
 
 
 As a team, we agree to:
