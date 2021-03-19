@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
@@ -12,7 +11,7 @@ public class Deck {
     private ArrayList<Card> deck;
 
     public Deck() {
-        this.deck = new ArrayList<Card>();
+        this.deck = new ArrayList<>();
         for (Suit suit : Suit.values()) {
             for (Name name : Name.values()) {
                 this.deck.add(new Card(suit, name));
@@ -24,18 +23,11 @@ public class Deck {
      * This constructor takes an ArrayList of Cards and
      * Creates an instance of a Deck with those cards.
      * This is primarily used for testing.
-     * @param originalDeck an ArrayList of Cards to create a
+     * @param originalDeckList an ArrayList of Cards to create a
      * deck object from.
      */
-    public Deck(ArrayList<Card> originalDeck) {
-//        this.deck = new ArrayList<Card>();
-//        for (int i = 0; i < originalDeck.size(); i++) {
-//            this.deck.add(originalDeck.get(i));
-//        }
-        // modified the method to use the add all method from the
-        // arrayList method glossary
-        this.deck = new ArrayList<Card>();
-        this.deck.addAll(originalDeck);
+    public Deck(ArrayList<Card> originalDeckList) {
+        this.deck = new ArrayList<>(originalDeckList);
     }
 
     /**
@@ -43,7 +35,7 @@ public class Deck {
      * @param originalDeck an instance of a Deck class.
      */
     public Deck(Deck originalDeck) {
-        this.deck = new ArrayList<Card>(originalDeck.getDeck());
+        this.deck = new ArrayList<>(originalDeck.getDeck());
     }
 
     /**
@@ -52,79 +44,65 @@ public class Deck {
      * @return an ArrayList of the cards in the deck.
      */
     ArrayList<Card> getDeck() {
-        ArrayList<Card> deckCopy = new ArrayList<>(deck);
-        return deckCopy;
+        return new ArrayList<>(deck);
     }
 
     /**
-     * This method is used to print the cards of the deck
-     * and prints it out to the user
+     * This method is used to add a card onto the deck
+     * @param newCard an instance of the card class
+     * @throws IllegalStateException if the deck is full.
+     * @throws IllegalArgumentException if card is already in the deck.
      */
-    public void printDeck() {
-        for (Card card : this.deck) { System.out.println(card); }
+    public void add(Card newCard) throws IllegalStateException, IllegalArgumentException {
+        if (isFull()) {
+            throw new IllegalStateException("This deck is already full.");
+        }
+        else if (hasCard(newCard)) {
+            throw new IllegalArgumentException("This card is already in the Deck.");
+        }
+        this.deck.add(newCard);
     }
 
     /**
      * This method is used to view the first card stored in the deck
-     * @return value of the first card in the deck
+     * @param index the index to return the card from
+     * @return the card at the requested index
+     * @throws IndexOutOfBoundsException if the index is out of bounds of the Deck.
+     * @throws IllegalStateException if the deck is empty.
      */
-    public Card getCard(){
-        if (!deck.isEmpty()) {
-            return this.deck.get(0);
+    public Card getCard(int index) throws IllegalStateException, IndexOutOfBoundsException {
+        if (deck.isEmpty()) {
+            throw new IllegalStateException("The deck is empty.");
         }
-        else {
-            return null;
+        else if (index >= deck.size()) {
+            throw new IndexOutOfBoundsException("There is no card at that position in the deck.");
         }
+        return this.deck.get(index);
+    }
+
+    /**
+     * This method is used to remove the first card stored in the deck
+     * @return the first card in the deck
+     * @throws IllegalStateException if the deck is empty.
+     */
+    public Card takeTopCard() throws IllegalStateException {
+        if (deck.isEmpty()) {
+            throw new IllegalStateException("The deck is empty.");
+        }
+        return this.deck.remove(0);
     }
 
     /**
      * This method is used to shuffle the cards in the deck
      */
     public void shuffle() {
-        ArrayList<Card> temp = new ArrayList<Card>();
+        ArrayList<Card> shuffledDeck = new ArrayList<>();
         Random randomise = new Random();
         while(!deck.isEmpty()) {
             int random = randomise.nextInt(deck.size());
-            temp.add(deck.remove(random));
+            shuffledDeck.add(deck.remove(random));
         }
-        this.deck = temp;
-    }
-
-    /**
-     * This method is used to add a card onto the deck
-     * @param cardToAdd an instance of the card class
-     */
-    public void add(Card cardToAdd) {
-        this.deck.add(cardToAdd);
-    }
-
-    /**
-     * This method is used to remove the first card stored in the deck
-     * @return value of the first card in the deck
-     */
-    public Card remove() {
-        if (!deck.isEmpty()){
-            return this.deck.remove(0);
-        }
-        else{
-            return null;
-        }
-    }
-
-    /**
-     * Boolean methode to determine if the deck is full or not
-     * @return true if the deck is full
-     */
-    private boolean isFull() {
-        return this.deck.size() >= MAX_CARDS_IN_DECK;
-    }
-
-    /**
-     * Boolean methode to determine if the deck is empty or not
-     * @return true if the deck is empty
-     */
-    private boolean isEmpty() {
-        return this.deck.size() == 0;
+        this.deck = shuffledDeck;
     }
 
     /**
@@ -141,7 +119,14 @@ public class Deck {
                 .comparing(Card::getName)
                 .thenComparing(Card::getSuit);
         deck.sort(compareByNameAndSuit);
-        //Collections.sort(deck, compareByNameAndSuit);
+    }
+
+    /**
+     * This method is used to print the cards of the deck
+     * and prints it out to the user
+     */
+    public void printDeck() {
+        for (Card card : this.deck) { System.out.println(card); }
     }
 
     /**
@@ -152,10 +137,44 @@ public class Deck {
         return this.deck.size();
     }
 
+    /**
+     * This method checks to see if a card is already in the Deck.
+     * It's package private for testing purposes.
+     * @param otherCard an instance of a Card.
+     * @return true if the card is already present in the deck, else false.
+     */
+    boolean hasCard(Card otherCard) {
+        return this.deck.contains(otherCard);
+    }
+
+        /**
+     * Boolean methode to determine if the deck is full or not
+     * @return true if the deck is full
+     */
+    private boolean isFull() {
+        return this.size() >= MAX_CARDS_IN_DECK;
+    }
+
+    /**
+     * Boolean methode to determine if the deck is empty or not
+     * @return true if the deck is empty
+     */
+    private boolean isEmpty() {
+        return this.size() == 0;
+    }
+
+    /**
+     * This is the toString method for the Deck Class.
+     * @return a formatted string of the Array.
+     */
+    public String toString() {
+        return "# of Cards in deck: " + this.size() +
+                "\nDeck Contains: " + this.deck.toString();
+    }
+
     public static void main(String[] args) {
         Deck testDeck = new Deck();
         testDeck.printDeck();
-        testDeck.sort();
-        System.out.println(testDeck.getDeck().toString());
+        System.out.println(testDeck.toString());
     }
 }
