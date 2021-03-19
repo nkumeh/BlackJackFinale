@@ -123,10 +123,15 @@ public class Deck {
 
     /**
      * This method is used to print the cards of the deck
-     * and prints it out to the user
+     * If a deck is empty it prints a message to the console.
      */
     public void printDeck() {
-        for (Card card : this.deck) { System.out.println(card); }
+        if (this.deck.isEmpty()) {
+            System.out.println("Your deck is empty.");
+        }
+        else {
+            System.out.println(deck.toString());
+        }
     }
 
     /**
@@ -151,7 +156,7 @@ public class Deck {
      * Boolean methode to determine if the deck is full or not
      * @return true if the deck is full
      */
-    private boolean isFull() {
+    boolean isFull() {
         return this.size() >= MAX_CARDS_IN_DECK;
     }
 
@@ -159,7 +164,7 @@ public class Deck {
      * Boolean methode to determine if the deck is empty or not
      * @return true if the deck is empty
      */
-    private boolean isEmpty() {
+    boolean isEmpty() {
         return this.size() == 0;
     }
 
