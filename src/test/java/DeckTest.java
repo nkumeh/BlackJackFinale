@@ -49,6 +49,16 @@ public class DeckTest {
     }
 
     /**
+     * This test checks that getCard throws an error when trying to
+     * access an element out of the index
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetCardThrowsExceptionForOutOfBoundsIndex() {
+        completeDeck.getCard(52);
+        partialDeck.getCard(4);
+    }
+
+    /**
      * This tests checks that the shuffle method returns a different list
      * of cards than were there previously.
      */
