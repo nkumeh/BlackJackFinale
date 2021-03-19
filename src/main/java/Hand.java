@@ -106,6 +106,6 @@ public class Hand extends Deck {
         yourHand.printDeck();
         myLuckyDeck.printDeck();
 
-        //Sort is being tested in the HandTest.java file.
+        // Sort is being tested in the HandTest.java file.
     }
 }
