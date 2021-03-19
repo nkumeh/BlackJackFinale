@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 /**
  * A Deck class that stores an ArrayList of Card objects. The default constructor
@@ -24,13 +25,17 @@ public class Deck {
      * Creates an instance of a Deck with those cards.
      * This is primarily used for testing.
      * @param originalDeck an ArrayList of Cards to create a
-     *        deck object from.
+     * deck object from.
      */
     public Deck(ArrayList<Card> originalDeck) {
+//        this.deck = new ArrayList<Card>();
+//        for (int i = 0; i < originalDeck.size(); i++) {
+//            this.deck.add(originalDeck.get(i));
+//        }
+        // modified the method to use the add all method from the
+        // arrayList method glossary
         this.deck = new ArrayList<Card>();
-        for (int i = 0; i < originalDeck.size(); i++) {
-            this.deck.add(originalDeck.get(i));
-        }
+        this.deck.addAll(originalDeck);
     }
 
     /**
@@ -51,28 +56,73 @@ public class Deck {
         return deckCopy;
     }
 
+    /**
+     * This method is used to print the cards of the deck
+     * and prints it out to the user
+     */
     public void printDeck() {
         for (Card card : this.deck) { System.out.println(card); }
     }
 
+    /**
+     * This method is used to view the first card stored in the deck
+     * @return value of the first card in the deck
+     */
+    public Card getCard(){
+        if (!deck.isEmpty()) {
+            return this.deck.get(0);
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * This method is used to shuffle the cards in the deck
+     */
     public void shuffle() {
-        // code
+        ArrayList<Card> temp = new ArrayList<Card>();
+        Random randomise = new Random();
+        while(!deck.isEmpty()) {
+            int random = randomise.nextInt(deck.size());
+            temp.add(deck.remove(random));
+        }
+        this.deck = temp;
     }
 
+    /**
+     * This method is used to add a card onto the deck
+     * @param cardToAdd an instance of the card class
+     */
     public void add(Card cardToAdd) {
-        // code
+        this.deck.add(cardToAdd);
     }
 
+    /**
+     * This method is used to remove the first card stored in the deck
+     * @return value of the first card in the deck
+     */
+    public Card remove() {
+        if (!deck.isEmpty()){
+            return this.deck.remove(0);
+        }
+        else{
+            return null;
+        }
+    }
+
+    /**
+     * Boolean methode to determine if the deck is full or not
+     * @return true if the deck is full
+     */
     private boolean isFull() {
         return this.deck.size() >= MAX_CARDS_IN_DECK;
     }
 
-    public Card remove() {
-        // code goes here
-        // ignore code below, java wouldnt compile if i didnt add it
-        return new Card(Suit.DIAMONDS, Name.JACK);
-    }
-
+    /**
+     * Boolean methode to determine if the deck is empty or not
+     * @return true if the deck is empty
+     */
     private boolean isEmpty() {
         return this.deck.size() == 0;
     }
@@ -90,7 +140,8 @@ public class Deck {
         Comparator<Card> compareByNameAndSuit = Comparator
                 .comparing(Card::getName)
                 .thenComparing(Card::getSuit);
-        Collections.sort(deck, compareByNameAndSuit);
+        deck.sort(compareByNameAndSuit);
+        //Collections.sort(deck, compareByNameAndSuit);
     }
 
     /**
