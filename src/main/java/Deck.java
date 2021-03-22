@@ -44,7 +44,7 @@ public class Deck {
      * @return an ArrayList of the cards in the deck.
      */
     ArrayList<Card> getDeck() {
-        return new ArrayList<>(deck);
+        return new ArrayList<>(this.deck);
     }
 
     /**
