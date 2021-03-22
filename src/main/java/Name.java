@@ -16,7 +16,7 @@ public enum Name {
     JACK(10, "Jack"),
     QUEEN(10, "Queen"),
     KING(10, "King"),
-    ACE(11, "Ace");
+    ACE(1, "Ace");
 
     private final int blackjackValue;
     private final String label;

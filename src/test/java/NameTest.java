@@ -21,7 +21,7 @@ public class NameTest {
         assertEquals(10, Name.JACK.getBlackjackValue());
         assertEquals(10, Name.QUEEN.getBlackjackValue());
         assertEquals(10, Name.KING.getBlackjackValue());
-        assertEquals(11, Name.ACE.getBlackjackValue());
+        assertEquals(1, Name.ACE.getBlackjackValue());
     }
 
     @Test

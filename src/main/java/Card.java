@@ -64,6 +64,14 @@ public class Card {
     }
 
     /**
+     * Method to return the card value. Returns a 1 for ACE
+     * @return int - card value
+     */
+    public int getValue() {
+        return this.name.getBlackjackValue();
+    }
+
+    /**
      * toString method for Card.
      * @return String e.g. TWO of HEARTS, ACE of CLUBS
      */
