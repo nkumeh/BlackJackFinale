@@ -7,7 +7,7 @@ import java.util.Random;
  * creates objects that represent the standard 52 cards.
  */
 public class Deck {
-    private final int MAX_CARDS_IN_DECK = 52;
+    final int MAX_CARDS_IN_DECK = 52;
     private ArrayList<Card> deck;
 
     public Deck() {
@@ -44,7 +44,7 @@ public class Deck {
      * @return an ArrayList of the cards in the deck.
      */
     ArrayList<Card> getDeck() {
-        return new ArrayList<>(deck);
+        return new ArrayList<>(this.deck);
     }
 
     /**
@@ -123,10 +123,15 @@ public class Deck {
 
     /**
      * This method is used to print the cards of the deck
-     * and prints it out to the user
+     * If a deck is empty it prints a message to the console.
      */
     public void printDeck() {
-        for (Card card : this.deck) { System.out.println(card); }
+        if (this.deck.isEmpty()) {
+            System.out.println("Your deck is empty.");
+        }
+        else {
+            System.out.println(deck.toString());
+        }
     }
 
     /**
@@ -151,7 +156,7 @@ public class Deck {
      * Boolean methode to determine if the deck is full or not
      * @return true if the deck is full
      */
-    private boolean isFull() {
+    boolean isFull() {
         return this.size() >= MAX_CARDS_IN_DECK;
     }
 
@@ -159,7 +164,7 @@ public class Deck {
      * Boolean methode to determine if the deck is empty or not
      * @return true if the deck is empty
      */
-    private boolean isEmpty() {
+    boolean isEmpty() {
         return this.size() == 0;
     }
 
