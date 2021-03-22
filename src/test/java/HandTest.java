@@ -57,12 +57,20 @@ public class HandTest {
     }
 
     /**
+     * This test checks that you cannot set the maxHandSize to a
+     * negative size.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetMaxHandSizeThrowsExceptionForNegativeSize() {
+        player2Hand.setHandSize(-2);
+    }
+
+    /**
      * This test checks that you cannot set the maxHandSize to an
-     * invalid size.
+     * invalid positive size.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSetMaxHandSizeThrowsExceptionForInvalidSize() {
-        player2Hand.setHandSize(-2);
         player1Hand.setHandSize(100);
     }
 
