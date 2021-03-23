@@ -1,5 +1,4 @@
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 public class VisualCard {
 
@@ -39,11 +38,10 @@ public class VisualCard {
      */
     @Override
     public String toString() {
-        if (this.isVisible) {
-            return formatVisibleCard();
-        } else {
-            return formatInvisibleCard();
-        }
+        return formatCard();
+//        } else {
+//            return formatInvisibleCard();
+//        }
     }
 
     /**
@@ -109,28 +107,13 @@ public class VisualCard {
      *
      * @return a formatted string of a card.
      */
-    private String formatVisibleCard() {
+    private String formatCard() {
         String border = "+-----+\n";
         String formattedCard = border + formatSuit(1) +
                 formatCardValue() +
                 formatSuit(3) +
                 border;
         return formattedCard;
-    }
-
-    /**
-     * This method creates a representation of a face-down card.
-     *
-     * @return a formatted string for a face-down card.
-     */
-    private String formatInvisibleCard() {
-        return """
-                +-----+
-                |XXXXX|
-                |XXXXX|
-                |XXXXX|
-                +-----+
-                """;
     }
 
     /**
@@ -145,15 +128,20 @@ public class VisualCard {
         StringBuilder formattedSuit = new StringBuilder("|");
         byte[] bytes = this.unicodeSuit.getBytes(StandardCharsets.UTF_8);
         String suitToPrint = new String(bytes, StandardCharsets.UTF_8);
-        if (row != 1 && row != 3) {
-            throw new IllegalArgumentException("Suit is only printed on rows 1 and 3.");
-        } else if (row == 1) {
-            formattedSuit.append(suitToPrint);
-            formattedSuit.append("    |\n");
-        } else {
-            formattedSuit.append("    ");
-            formattedSuit.append(suitToPrint);
-            formattedSuit.append("|\n");
+        if (this.isVisible) {
+            if (row != 1 && row != 3) {
+                throw new IllegalArgumentException("Suit is only printed on rows 1 and 3.");
+            } else if (row == 1) {
+                formattedSuit.append(suitToPrint);
+                formattedSuit.append("    |\n");
+            } else {
+                formattedSuit.append("    ");
+                formattedSuit.append(suitToPrint);
+                formattedSuit.append("|\n");
+            }
+        }
+        else {
+            formattedSuit.append("XXXXX|\n");
         }
         return formattedSuit.toString();
     }
@@ -165,12 +153,17 @@ public class VisualCard {
      */
     String formatCardValue() {
         StringBuilder formattedValue = new StringBuilder();
-        switch (this.cardValue.length()) {
-            case 1 -> formattedValue.append("|  ").append(cardValue).append("  |\n");
-            case 2 -> formattedValue.append("|  ").append(cardValue).append(" |\n");
-            case 3 -> formattedValue.append("| ").append(cardValue).append(" |\n");
-            case 4 -> formattedValue.append("|").append(cardValue).append(" |\n");
-            default -> formattedValue.append("|").append(cardValue).append("|\n");
+        if (this.isVisible) {
+            switch (this.cardValue.length()) {
+                case 1 -> formattedValue.append("|  ").append(cardValue).append("  |\n");
+                case 2 -> formattedValue.append("|  ").append(cardValue).append(" |\n");
+                case 3 -> formattedValue.append("| ").append(cardValue).append(" |\n");
+                case 4 -> formattedValue.append("|").append(cardValue).append(" |\n");
+                default -> formattedValue.append("|").append(cardValue).append("|\n");
+            }
+        }
+        else {
+            formattedValue.append("|XXXXX|\n");
         }
         return formattedValue.toString();
     }
