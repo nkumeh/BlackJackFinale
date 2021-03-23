@@ -16,20 +16,16 @@ public class BlackJackView {
     Player dealer;
     ArrayList<Player> players;
     Scanner keyboard;
-    int numberOfPlayers;
 
     public BlackJackView() {
         this.dealer = Player.DEALER;
         players = new ArrayList<>();
-        printInstructions();
-        Scanner keyboard = new Scanner(System.in);
-        setUpGame(keyboard.nextLine());
     }
 
     /**
      * This method prints the game instructions.
      */
-    private void printInstructions() {
+    public void printInstructions() {
         String instructions = """
             Welcome to the Game of BlackJack!
             
@@ -62,25 +58,16 @@ public class BlackJackView {
     /**
      * This method sets the number of players with a valid number based on user input.
      */
-    private void setNumberOfPlayers() {
+    void getNumberOfPlayers() {
         System.out.println("How many players will be playing (between 1 and 5)?");
-        int players = keyboard.nextInt();
-        while (players < 1 || players > 5) {
-            System.out.println("Please enter a number between 1 and 5.");
-            players = keyboard.nextInt();
-        }
-        this.numberOfPlayers = players;
     }
 
     /** ADDING METHODS FOR CREATING PLAYERS
      *
      */
-//    this method will need to send the info back to the controller to create new players.
-//    public void createPlayers(int numPlayers) {
-//        for (int i = 0; i < numPlayers; i++) {
-//            System.out.println("What is Player " + i+1 + "'s Name?");
-//        }
-//    }
+    public void getPlayerName(int playerNumber) {
+        System.out.println("What is Player " + playerNumber + "'s Name?");
+    }
 //
 //    this method will need to get player objects from  the controller
 //    public void addPlayer(ArrayList<Players> players) {
