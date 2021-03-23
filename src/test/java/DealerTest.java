@@ -1,2 +1,13 @@
-package PACKAGE_NAME;public class DealerTest {
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+/**
+ * A JUnit4 test class for Dealer class.
+ */
+public class DealerTest {
+
+
+
+
 }
