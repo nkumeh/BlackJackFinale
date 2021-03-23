@@ -6,20 +6,20 @@ import java.util.ArrayList;
  * This class utilizes the methods in the parent class.
  *
  * This class includes two constructors:
- *     The no-argument constructor creates an empty hand with a maxHandSize initialized to zero.
- *     The constructor that allows you to set the maxHandSize.
+ *     The no-argument constructor creates an empty hand with a handSize initialized to zero.
+ *     The constructor that allows you to set the handSize.
  */
 
 public class Hand extends Deck {
 
-    int maxHandSize;
+    int handSize;
 
     /**
      * This constructor creates an empty hand with 0 cards.
      */
     public Hand() {
         super(new ArrayList<>());
-        maxHandSize = 0;
+        handSize = 0;
     }
 
     /**
@@ -31,11 +31,11 @@ public class Hand extends Deck {
     }
 
     /**
-     * Getter method for the maxHandSize, the most cards one can add to a hand.
-     * @return maxHandSize (an int).
+     * Getter method for the handSize, the most cards one can add to a hand.
+     * @return handSize (an int).
      */
     public int getHandSize() {
-        return this.maxHandSize;
+        return this.handSize;
     }
 
     /**
@@ -46,18 +46,12 @@ public class Hand extends Deck {
      */
     public void setHandSize(int newHandSize) throws IllegalArgumentException {
         if (newHandSize > 0 && newHandSize <= super.MAX_CARDS_IN_DECK) {
-            this.maxHandSize = newHandSize;
+            this.handSize = newHandSize;
         }
         else {
             throw new IllegalArgumentException("Invalid Hand Size: " + newHandSize);
         }
     }
-
-    @Override
-    boolean isFull() {
-        return this.size() >= maxHandSize;
-    }
-
 
     public static void main(String[] args) {
         // Create and shuffle a new deck.
