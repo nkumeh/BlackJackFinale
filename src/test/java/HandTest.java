@@ -75,24 +75,12 @@ public class HandTest {
     }
 
     /**
-     * This test checks that you cannot add more cards to a hand
-     * than the maxHandSize.
-     */
-    @Test(expected = IllegalStateException.class)
-    public void testAddCardThrowsExceptionWhenDeckIsFull() {
-        player1Hand.setHandSize(4);
-        for (int i = 0; i < 5; i++) {
-            player1Hand.add(completeDeck.takeTopCard());
-        }
-    }
-
-    /**
      * This test checks that a card that is added to a hand
      * is properly removed from the deck.
      */
     @Test
     public void testAddToHandRemovesFromDeck() {
-        for (int i = 0; i < player1Hand.maxHandSize; i++) {
+        for (int i = 0; i < player1Hand.getHandSize(); i++) {
             Card topCard = completeDeck.takeTopCard();
             player2Hand.add(topCard);
             assertTrue(player1Hand.hasCard(topCard));
