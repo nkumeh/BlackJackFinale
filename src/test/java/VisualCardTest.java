@@ -1,4 +1,3 @@
-import VisualCard;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -90,9 +89,9 @@ public class VisualCardTest {
     public void testFormatsTwoDigitCard() {
         String expected = """
             +-----+
-            |♦    |
+            |♢    |
             |  10 |
-            |    ♦|
+            |    ♢|
             +-----+
                         """;
         assertEquals(expected, tenOfDiamonds.toString());
@@ -114,9 +113,9 @@ public class VisualCardTest {
     public void testFormatsJackCard() {
         String expected = """
             +-----+
-            |♥    |
+            |♡    |
             |Jack |
-            |    ♥|
+            |    ♡|
             +-----+
                             """;
         assertEquals(expected, jackOfHearts.toString());
@@ -126,9 +125,9 @@ public class VisualCardTest {
     public void testFormatsQueenCard() {
         String expected = """
             +-----+
-            |♥    |
+            |♡    |
             |Queen|
-            |    ♥|
+            |    ♡|
             +-----+
                             """;
         assertEquals(expected, queenOfHearts.toString());
