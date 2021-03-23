@@ -1,5 +1,3 @@
-package View;
-
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -75,10 +73,10 @@ public class VisualCard {
     void setUnicodeSuit(Suit suit) {
 
         switch (suit) {
-            case Suit.CLUBS -> this.unicodeSuit = "\u2663";
-            case Suit.DIAMONDS -> this.unicodeSuit = "\u2662";
-            case Suit.HEARTS -> this.unicodeSuit = "\u2661";
-            case Suit.SPADES -> this.unicodeSuit = "\u2660";
+            case CLUBS -> this.unicodeSuit = "\u2663";
+            case DIAMONDS -> this.unicodeSuit = "\u2662";
+            case HEARTS -> this.unicodeSuit = "\u2661";
+            case SPADES -> this.unicodeSuit = "\u2660";
             default -> this.unicodeSuit = "Invalid suit.";
         }
     }
