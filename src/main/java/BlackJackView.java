@@ -117,6 +117,15 @@ public class BlackJackView {
     }
 
     /**
+     * This method prints the new card that was drawn. This may be unnecessary.
+     */
+    public void printNewCard(Card card, boolean isVisible) {
+        VisualCard newCard = new VisualCard(card, isVisible);
+        System.out.println("The new card is:");
+        System.out.println(newCard.toString());
+    }
+
+    /**
      * This method prints the winner information to the dialog.
      * @param player the winner of the game.
      */
@@ -153,6 +162,8 @@ public class BlackJackView {
         Hand hand1 = new Hand(2);
         hand1.add(new Card(Suit.HEARTS, Name.TEN));
         hand1.add(new Card(Suit.SPADES, Name.ACE));
+        view.printNewCard(new Card(Suit.SPADES, Name.TWO), true);
+        view.printNewCard(new Card(Suit.SPADES, Name.FIVE), false);
         view.printHitOrStandDialog();
         view.printHand(hand1, 21, Player.PERSON);
         view.printWinner(Player.DEALER);
