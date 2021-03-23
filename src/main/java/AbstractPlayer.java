@@ -1,25 +1,31 @@
 /**
- * Abstract class for a Player. Every Player has a Hand and a currentHandValue.
+ * Abstract class for a Player. Every Player has a Name, Hand and a
+ * currentHandValue.
  */
 public abstract class AbstractPlayer {
     private Hand hand;
+    private String name;
     private int currentHandValue;
     public static final int BLACKJACK = 21;
 
 
     /**
      * Constructor for an Abstract Player.
+     * @param name the name of the player
      */
-    public AbstractPlayer() {
+    public AbstractPlayer(String name) {
+        this.name = name;
         this.hand = new Hand();
         calculateHandValue();
     }
 
     /**
      * Constructor for an Abstract Player with a set hand. Used in Testing
+     * @param name the name of the player
      * @param dealtHand Hand to start with
      */
-    public AbstractPlayer(Hand dealtHand) {
+    public AbstractPlayer(String name, Hand dealtHand) {
+        this.name = name;
         this.hand = dealtHand;
         calculateHandValue();
     }
@@ -39,6 +45,14 @@ public abstract class AbstractPlayer {
      */
     public Hand getHand() {
         return this.hand;
+    }
+
+    /**
+     * Returns the name of the player.
+     * @return String
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -104,15 +118,16 @@ public abstract class AbstractPlayer {
     }
 
     /**
-     * Abstract hit method that all children should have.
+     * A player can hit if their total is under 21. Takes the top card from the
+     * deck and adds it to the player's hand. Recalculates the currentHandValue.
      * @param deck the Deck of cards being played with
+     * @throws IllegalStateException if the total is over 21
      */
-    public abstract void hit(Deck deck);
-
-    /**
-     * Method to stand. Does nothing.
-     */
-    public void stand() {
-        // do nothing
+    public void hit(Deck deck) throws IllegalStateException {
+        if (this.isOver21())
+            throw new IllegalStateException("Cannot hit if over 21.");
+        Card topCard = deck.takeTopCard();
+        this.getHand().add(topCard);
+        calculateHandValue();
     }
 }

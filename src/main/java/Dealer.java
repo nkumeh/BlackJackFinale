@@ -9,8 +9,8 @@ public class Dealer extends AbstractPlayer {
      * Dealer constructor calls Abstract constructor. Sets empty Hand and a
      * currentHandValue value of 0.
      */
-    public Dealer() {
-        super();
+    public Dealer(String name) {
+        super(name);
     }
 
     /**
@@ -18,8 +18,8 @@ public class Dealer extends AbstractPlayer {
      * hand and calculates the currentHandValue.
      * @param dealtHand Hand object
      */
-    public Dealer(Hand dealtHand) {
-        super(dealtHand);
+    public Dealer(String name, Hand dealtHand) {
+        super(name, dealtHand);
     }
 
     /**
@@ -38,12 +38,7 @@ public class Dealer extends AbstractPlayer {
      */
     @Override
     public void hit(Deck deck) throws IllegalStateException {
-        while (canHit()) {
-            if (this.isOver21())
-                throw new IllegalStateException("Cannot hit if over 21.");
-            Card topCard = deck.takeTopCard();
-            this.getHand().add(topCard);
-            calculateHandValue();
-        }
+        if (canHit())
+            super.hit(deck);
     }
 }
