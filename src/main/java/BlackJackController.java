@@ -9,20 +9,20 @@ public class BlackJackController {
 
     // will need to create a blackjack game (instance of the model).
     // that will have the players for the game.
-    BlackJackView view;
-    Scanner keyboard;
+    private BlackJackView view;
+    private Scanner keyboard;
 
     public BlackJackController() {
         // create a new blackjack model
-        BlackJackView view = new BlackJackView();
-        Scanner keyboard = new Scanner(System.in);
+        view = new BlackJackView();
+        keyboard = new Scanner(System.in);
     }
 
     public void startGame() {
         view.printInstructions();
         String userInput = keyboard.next();
         if (!userInput.equalsIgnoreCase("Q")) {
-            setUpPlayer();
+            setUpPlayers();
         }
         else {
             quitGame();
@@ -40,14 +40,11 @@ public class BlackJackController {
         for (int i = 0; i < numPlayers; i++) {
             view.getPlayerName(i + 1);
             String playerName = keyboard.nextLine();
-
+            // create player objects through game or directly?
+            // add them to the game?
         }
     }
 
-
-    private void createPlayer() {
-
-    }
 
     private void processPlayerTurn() {
         // get current player from model
@@ -55,13 +52,43 @@ public class BlackJackController {
         view.printHitOrStandDialog();
         String userInput = keyboard.next();
         if (userInput.equalsIgnoreCase("Q")) {
-            quitGame();
+            this.quitGame();
         }
         else if (userInput.equalsIgnoreCase("H")) {
-            // code to get a new card
-        else if (userInput.equalsIgnoreCase("S"))
+            this.hit();
         }
+        else if (userInput.equalsIgnoreCase("S")) {
+            this.stand();
+        }
+        else {
+            view.printInvalidInput();
+            processPlayerTurn();
+        }
+    }
 
+    private void hit() {
+        // send code to model to hit.
+        // Maybe print new card.
+        // view.printHand(get player hand, get current value, player);
+        // if player busts, hit bust
+        processPlayerTurn();
+    }
+
+    private void stand() {
+        view.printStandInformation();
+        // view.printHand(get player hand, get current value, player);
+        // send info back to the blackjack model.
+    }
+
+    private processDealerTurn() {
+        // code to have dealer take a turn
+    }
+
+    private playGame() {
+        // iterate through players
+        // have players take their turn.
+        // have dealer take it's turn.
+//        view.printWinner(player);
     }
 
     private void quitGame() {

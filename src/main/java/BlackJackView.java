@@ -42,20 +42,6 @@ public class BlackJackView {
     }
 
     /**
-     * This method sets up the game with the number of players.
-     * @param userInput the input received from the user.
-     */
-    private void setUpGame(String userInput) {
-        if (userInput.equalsIgnoreCase("Q")) {
-            System.exit(0);
-        }
-        else {
-            setNumberOfPlayers();
-        }
-    }
-
-
-    /**
      * This method sets the number of players with a valid number based on user input.
      */
     void getNumberOfPlayers() {
@@ -104,6 +90,14 @@ public class BlackJackView {
         System.out.println(options);
     }
 
+    void printInvalidInput() {
+        System.out.println("That input was invalid. Valid inputs are 'H', 'S', or 'Q'.");
+    }
+
+    void printStandInformation() {
+        System.out.println("Your turn is over. Here's your current hand:");
+    }
+
     /**
      * This method prints the new card that was drawn. This may be unnecessary.
      */
@@ -111,6 +105,19 @@ public class BlackJackView {
         VisualCard newCard = new VisualCard(card, isVisible);
         System.out.println("The new card is:");
         System.out.println(newCard.toString());
+    }
+
+    public void printBust(Player player) {
+        String bust =  """
+            ____  _    _  _____ _______ 
+           |  _ \\| |  | |/ ____|__   __|
+           | |_) | |  | | (___    | |   
+           |  _ <| |  | |\\___ \\   | |   
+           | |_) | |__| |____) |  | |   
+           |____/ \\____/|_____/   |_| 
+    """;
+        System.out.println(bust);
+        System.out.println("Whoops! " + player.name() + " bust.");
     }
 
     /**
