@@ -27,7 +27,7 @@ public class Dealer extends AbstractPlayer {
      * under 17.
      * @return true if under 17, false otherwise
      */
-    public boolean canHit() {
+    private boolean canHit() {
         return this.getCurrentHandValue() < DEALER_MAX;
     }
 
