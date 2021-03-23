@@ -6,11 +6,11 @@
 
 public class VisualHand {
 
-    private Hand hand;
-    private int handSize;
-    private VisualCard[] visualCards;
+    private final Hand hand;
+    private final int handSize;
+    private final VisualCard[] visualCards;
     private String formattedHand;
-    private StringBuilder border;
+    private final StringBuilder border;
     private StringBuilder row1;
     private StringBuilder row2;
     private StringBuilder row3;
@@ -111,12 +111,10 @@ public class VisualHand {
      * formatted String that can be called using the toString method.
      */
     private void createFinalHandView() {
-        StringBuilder finalHandView = new StringBuilder(this.border.toString());
-        finalHandView.append(this.row1.toString());
-        finalHandView.append(this.row2.toString());
-        finalHandView.append(this.row3.toString());
-        finalHandView.append(this.border.toString());
-        this.formattedHand = finalHandView.toString();
+        this.formattedHand = this.border.toString() + this.row1.toString() +
+                this.row2.toString() +
+                this.row3.toString() +
+                this.border.toString();
     }
 
 }

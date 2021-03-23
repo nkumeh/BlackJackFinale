@@ -10,7 +10,7 @@ public class BlackJackView {
     //this will be removed when we have the player class built
     public enum Player {
         DEALER,
-        PERSON;
+        PERSON
     }
 
     Player dealer;
@@ -23,7 +23,7 @@ public class BlackJackView {
         players = new ArrayList<>();
         printInstructions();
         Scanner keyboard = new Scanner(System.in);
-//        setUpGame(keyboard.nextLine());
+        setUpGame(keyboard.nextLine());
     }
 
     /**
@@ -47,10 +47,10 @@ public class BlackJackView {
 
     /**
      * This method sets up the game with the number of players.
-     * @param instruction
+     * @param userInput the input received from the user.
      */
-    private void setUpGame(String instruction) {
-        if (instruction.equalsIgnoreCase("Q")) {
+    private void setUpGame(String userInput) {
+        if (userInput.equalsIgnoreCase("Q")) {
             System.exit(0);
         }
         else {
@@ -67,6 +67,7 @@ public class BlackJackView {
         int players = keyboard.nextInt();
         while (players < 1 || players > 5) {
             System.out.println("Please enter a number between 1 and 5.");
+            players = keyboard.nextInt();
         }
         this.numberOfPlayers = players;
     }

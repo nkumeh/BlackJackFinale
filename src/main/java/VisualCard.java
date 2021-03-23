@@ -39,9 +39,6 @@ public class VisualCard {
     @Override
     public String toString() {
         return formatCard();
-//        } else {
-//            return formatInvisibleCard();
-//        }
     }
 
     /**
@@ -109,11 +106,10 @@ public class VisualCard {
      */
     private String formatCard() {
         String border = "+-----+\n";
-        String formattedCard = border + formatSuit(1) +
+        return border + formatSuit(1) +
                 formatCardValue() +
                 formatSuit(3) +
                 border;
-        return formattedCard;
     }
 
     /**
