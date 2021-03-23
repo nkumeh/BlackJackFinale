@@ -150,9 +150,12 @@ public class BlackJackView {
 
     public static void main(String[] args) {
         BlackJackView view = new BlackJackView();
+        Hand hand1 = new Hand(2);
+        hand1.add(new Card(Suit.HEARTS, Name.TEN));
+        hand1.add(new Card(Suit.SPADES, Name.ACE));
+        view.printHitOrStandDialog();
+        view.printHand(hand1, 21, Player.PERSON);
         view.printWinner(Player.DEALER);
         view.printWinner(Player.PERSON);
     }
-
-
 }
