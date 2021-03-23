@@ -17,8 +17,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void testPlayer() {
-        assertEquals(0, player1.getCurrentHandValue());
+    public void testGetName() {
         assertEquals("Maria Konnikova", player1.getName());
     }
 

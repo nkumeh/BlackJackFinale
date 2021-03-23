@@ -21,7 +21,7 @@ public class AbstractPlayerTest {
         startingHand.add(new Card(Suit.CLUBS, Name.EIGHT));
         startingHand.add(new Card(Suit.CLUBS, Name.ACE));
         player2 = new Player("Justin Bonomo", startingHand);
-        dealer = new Dealer("Bellagio Las Vegas");
+        dealer = new Dealer();
     }
 
     @Test
@@ -49,13 +49,6 @@ public class AbstractPlayerTest {
         startingHand.add(new Card(Suit.CLUBS, Name.ACE));
         Player tempPlayer = new Player("Temp", startingHand);
         assertEquals(startingHand, tempPlayer.getHand());
-    }
-
-    @Test
-    public void testGetName() {
-        assertEquals("Maria Konnikova", player1.getName());
-        assertEquals("Justin Bonomo", player2.getName());
-        assertEquals("Bellagio Las Vegas", dealer.getName());
     }
 
     @Test

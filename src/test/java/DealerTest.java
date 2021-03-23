@@ -14,7 +14,7 @@ public class DealerTest {
 
     @Before
     public void setUp() {
-        dealer = new Dealer("Bellagio Las Vegas");
+        dealer = new Dealer();
     }
 
     @Test

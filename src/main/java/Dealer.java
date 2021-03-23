@@ -9,8 +9,8 @@ public class Dealer extends AbstractPlayer {
      * Dealer constructor calls Abstract constructor. Sets empty Hand and a
      * currentHandValue value of 0.
      */
-    public Dealer(String name) {
-        super(name);
+    public Dealer() {
+        super();
     }
 
     /**
@@ -18,8 +18,8 @@ public class Dealer extends AbstractPlayer {
      * hand and calculates the currentHandValue.
      * @param dealtHand Hand object
      */
-    public Dealer(String name, Hand dealtHand) {
-        super(name, dealtHand);
+    public Dealer(Hand dealtHand) {
+        super(dealtHand);
     }
 
     /**

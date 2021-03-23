@@ -1,33 +1,26 @@
 /**
- * Abstract class for a Player. Every Player has a Name, Hand and a
- * currentHandValue.
+ * Abstract class for a Player. Every Player has a Hand and currentHandValue.
  */
 public abstract class AbstractPlayer {
     private Hand hand;
-    private String name;
     private int currentHandValue;
     public static final int BLACKJACK = 21;
 
-
     /**
      * Constructor for an Abstract Player.
-     * @param name the name of the player
      */
-    public AbstractPlayer(String name) {
-        this.name = name;
+    public AbstractPlayer() {
         this.hand = new Hand();
-        calculateHandValue();
+        this.calculateHandValue();
     }
 
     /**
      * Constructor for an Abstract Player with a set hand. Used in Testing
-     * @param name the name of the player
      * @param dealtHand Hand to start with
      */
-    public AbstractPlayer(String name, Hand dealtHand) {
-        this.name = name;
+    public AbstractPlayer(Hand dealtHand) {
         this.hand = dealtHand;
-        calculateHandValue();
+        this.calculateHandValue();
     }
 
     /**
@@ -35,7 +28,7 @@ public abstract class AbstractPlayer {
      * @return int - currentHandValue
      */
     public int getCurrentHandValue() {
-        calculateHandValue();
+        this.calculateHandValue();
         return this.currentHandValue;
     }
 
@@ -46,14 +39,6 @@ public abstract class AbstractPlayer {
      */
     public Hand getHand() {
         return this.hand;
-    }
-
-    /**
-     * Returns the name of the player.
-     * @return String
-     */
-    public String getName() {
-        return this.name;
     }
 
     /**
@@ -88,9 +73,9 @@ public abstract class AbstractPlayer {
      */
     private int calculateHardHandValue() {
         if (this.hasAce()) {
-            return calculateSoftHandValue() + 10;
+            return this.calculateSoftHandValue() + 10;
         } else {
-            return calculateSoftHandValue();
+            return this.calculateSoftHandValue();
         }
     }
 
@@ -113,7 +98,7 @@ public abstract class AbstractPlayer {
      */
     public void calculateHandValue() {
         this.currentHandValue = this.calculateHardHandValue();
-        if (isOver21())
+        if (this.isOver21())
             this.currentHandValue = this.calculateSoftHandValue();
     }
 
@@ -128,6 +113,6 @@ public abstract class AbstractPlayer {
             throw new IllegalStateException("Cannot hit if over 21.");
         Card topCard = deck.takeTopCard();
         this.getHand().add(topCard);
-        calculateHandValue();
+        this.calculateHandValue();
     }
 }
