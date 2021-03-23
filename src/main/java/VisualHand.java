@@ -1,5 +1,4 @@
-package View;
-import java.Hand.*;
+
 
 /**
  * This class creates a visual representation of a Hand.
