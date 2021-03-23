@@ -1,3 +1,6 @@
+package ViewTests;
+
+import VisualCard;
 import org.junit.Before;
 import org.junit.Test;
 
