@@ -25,9 +25,18 @@ public class Hand extends Deck {
     /**
      * This constructor creates an empty hand with 0 cards.
      */
-    public Hand(int maxCards) {
+    public Hand(int handSize) {
         super(new ArrayList<>());
-        setHandSize(maxCards);
+        setHandSize(Hand.this.handSize);
+    }
+
+    /**
+     * This constructor creates an empty hand with 0 cards.
+     */
+    public Hand(Deck deck, int handSize) {
+        super(new ArrayList<>());
+        if (isValidHandSize(handSize) && handSize <= deck.size())
+            // Loop to add cards from deck into hand.
     }
 
     /**
@@ -39,18 +48,16 @@ public class Hand extends Deck {
     }
 
     /**
-     * This method allows you to set the maximum number of cards in a hand.
-     * @param newHandSize an integer
+     * This method checks whether the handSize is valid
+     * @param handSize an integer
      * @throws IllegalArgumentException if the maximum number of cards is less than 1 or greater than
      *                                  the maximum number of cards in a deck.
      */
-    public void setHandSize(int newHandSize) throws IllegalArgumentException {
-        if (newHandSize > 0 && newHandSize <= super.MAX_CARDS_IN_DECK) {
-            this.handSize = newHandSize;
+    private boolean isValidHandSize(int handSize) throws IllegalArgumentException {
+        if (handSize >= 0 && handSize <= super.MAX_CARDS_IN_DECK) {
+            return true;
         }
-        else {
-            throw new IllegalArgumentException("Invalid Hand Size: " + newHandSize);
-        }
+        throw new IllegalArgumentException("Invalid Hand Size: " + handSize);
     }
 
     public static void main(String[] args) {
