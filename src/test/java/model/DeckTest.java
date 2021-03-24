@@ -1,3 +1,9 @@
+package model;
+
+import model.Card;
+import model.Deck;
+import model.Name;
+import model.Suit;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import view.BlackJackView;
+
 
 /**
  * This is the controller for the BlackJack Game. It handles the communication between the model
@@ -80,11 +82,11 @@ public class BlackJackController {
         // send info back to the blackjack model.
     }
 
-    private processDealerTurn() {
+    private void processDealerTurn() {
         // code to have dealer take a turn
     }
 
-    private playGame() {
+    private void playGame() {
         // iterate through players
         // have players take their turn.
         // have dealer take it's turn.

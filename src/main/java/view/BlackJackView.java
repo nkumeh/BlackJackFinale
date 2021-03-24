@@ -1,3 +1,10 @@
+package view;
+
+import model.Card;
+import model.Hand;
+import model.Name;
+import model.Suit;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,7 +51,7 @@ public class BlackJackView {
     /**
      * This method sets the number of players with a valid number based on user input.
      */
-    void getNumberOfPlayers() {
+    public void getNumberOfPlayers() {
         System.out.println("How many players will be playing (between 1 and 5)?");
     }
 
@@ -90,11 +97,11 @@ public class BlackJackView {
         System.out.println(options);
     }
 
-    void printInvalidInput() {
+    public void printInvalidInput() {
         System.out.println("That input was invalid. Valid inputs are 'H', 'S', or 'Q'.");
     }
 
-    void printStandInformation() {
+    public void printStandInformation() {
         System.out.println("Your turn is over. Here's your current hand:");
     }
 

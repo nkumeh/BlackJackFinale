@@ -1,3 +1,9 @@
+package view;
+
+import model.Card;
+import model.Name;
+import model.Suit;
+
 import java.nio.charset.StandardCharsets;
 
 public class VisualCard {

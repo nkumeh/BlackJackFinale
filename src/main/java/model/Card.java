@@ -1,3 +1,5 @@
+package model;
+
 /**
  * A Card class. Every card has a suit (e.g., Clubs, Diamonds, Hearts, Spades)
  * and name (e.g., Ace, 2, 10, Jack).

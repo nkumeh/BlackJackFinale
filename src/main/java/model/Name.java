@@ -1,3 +1,5 @@
+package model;
+
 /**
  * An enum that represents the name of a card. A card can be any value in the
  * range 2-10, as well as face cards Jack, Queen, King, and Ace. Ace takes

@@ -1,3 +1,9 @@
+package view;
+
+import model.Card;
+import model.Hand;
+import model.Name;
+import model.Suit;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,3 +1,5 @@
+package model;
+
 /**
  * A Player class that extends from an Abstract player.
  */

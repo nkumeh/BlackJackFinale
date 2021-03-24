@@ -1,4 +1,6 @@
+package view;
 
+import model.Hand;
 
 /**
  * This class creates a visual representation of a Hand.
