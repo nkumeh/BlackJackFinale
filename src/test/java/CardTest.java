@@ -54,19 +54,19 @@ public class CardTest {
     @Test
     public void testEquals() {
         // testing reflexivity
-        assertTrue(aceOfClubs.equals(aceOfClubs));
-        assertTrue(twoOfHearts.equals(twoOfHearts));
-        assertTrue(aceOfSpades.equals(aceOfSpades));
+        assertEquals(aceOfClubs, aceOfClubs);
+        assertEquals(twoOfHearts, twoOfHearts);
+        assertEquals(aceOfSpades, aceOfSpades);
 
         // testing symmetry
-        assertFalse(aceOfSpades.equals(aceOfClubs));
-        assertFalse(aceOfClubs.equals(aceOfSpades));
+        assertNotEquals(aceOfSpades, aceOfClubs);
+        assertNotEquals(aceOfClubs, aceOfSpades);
 
         // testing transitivity
         Card aceOfSpadesCopy = new Card(Suit.SPADES, Name.ACE);
         Card secondAceOfSpadesCopy = new Card(Suit.SPADES, Name.ACE);
-        assertTrue(aceOfSpades.equals(aceOfSpadesCopy));
-        assertTrue(aceOfSpadesCopy.equals(secondAceOfSpadesCopy));
-        assertTrue(aceOfSpades.equals(secondAceOfSpadesCopy));
+        assertEquals(aceOfSpades, aceOfSpadesCopy);
+        assertEquals(aceOfSpadesCopy, secondAceOfSpadesCopy);
+        assertEquals(aceOfSpades, secondAceOfSpadesCopy);
     }
 }

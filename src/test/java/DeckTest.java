@@ -2,7 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.*;
 
@@ -66,11 +66,13 @@ public class DeckTest {
     public void testShuffleReturnsNewOrdering() {
         Deck originalDeck = new Deck(completeDeck);
         completeDeck.shuffle();
-        assertNotEquals(Arrays.asList(originalDeck.getDeck()), Arrays.asList(completeDeck.getDeck()));
+        assertNotEquals(Collections.singletonList(originalDeck.getDeck()),
+                Collections.singletonList(completeDeck.getDeck()));
 
         Deck originalDeck2 = new Deck(partialDeck);
         partialDeck.shuffle();
-        assertNotEquals(Arrays.asList(originalDeck2.getDeck()), Arrays.asList(partialDeck.getDeck()));
+        assertNotEquals(Collections.singletonList(originalDeck2.getDeck()),
+                Collections.singletonList(partialDeck.getDeck()));
     }
 
     /**
@@ -80,7 +82,7 @@ public class DeckTest {
     @Test
     public void testShuffleContainsUniqueCards() {
         completeDeck.shuffle();
-        for (Card card : completeDeck.getDeck()) {
+        for (Card ignored : completeDeck.getDeck()) {
             Card removedCard = completeDeck.takeTopCard();
             assertFalse(completeDeck.hasCard(removedCard));
         }
