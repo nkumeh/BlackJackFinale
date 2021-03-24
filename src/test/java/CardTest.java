@@ -38,6 +38,14 @@ public class CardTest {
     }
 
     @Test
+    public void getValue() {
+        assertEquals(1, aceOfClubs.getValue());
+        assertEquals(2, twoOfHearts.getValue());
+        assertEquals(1, aceOfSpades.getValue());
+        assertEquals(10, jackOfDiamonds.getValue());
+    }
+
+    @Test
     public void isAce() {
         assertTrue(aceOfClubs.isAce());
         assertFalse(twoOfHearts.isAce());
