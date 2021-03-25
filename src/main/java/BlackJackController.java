@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -7,22 +8,26 @@ import java.util.Scanner;
 
 public class BlackJackController {
 
-    // will need to create a blackjack game (instance of the model).
-    // that will have the players for the game.
-    private BlackJackView view;
+    private final BlackJackView view;
+    private BlackJackModel model;
     private Scanner keyboard;
+    private Dealer dealer;
+    private int numPlayers;
 
     public BlackJackController() {
-        // create a new blackjack model
-        view = new BlackJackView();
-        keyboard = new Scanner(System.in);
+        this.view = new BlackJackView();
+        this.keyboard = new Scanner(System.in);
+        startGame();
     }
 
     public void startGame() {
-        view.printInstructions();
-        String userInput = keyboard.next();
+        this.view.printInstructions();
+        String userInput = getUserInputAsString();
         if (!userInput.equalsIgnoreCase("Q")) {
             setUpPlayers();
+            createPlayers();
+            setDealer();
+            playGame();
         }
         else {
             quitGame();
@@ -30,65 +35,96 @@ public class BlackJackController {
     }
 
     private void setUpPlayers() {
-        view.getNumberOfPlayers();
-        int numPlayers = keyboard.nextInt();
-        while (numPlayers < 1 || numPlayers > 5) {
+        this.view.getNumberOfPlayers();
+        this.numPlayers = keyboard.nextInt();
+        while (this.numPlayers < 1 || this.numPlayers > 5) {
             System.out.println("Please enter a number between 1 and 5.");
-            numPlayers = keyboard.nextInt();
+            this.numPlayers = keyboard.nextInt();
         }
-        //send number of players to blackjack model
-        for (int i = 0; i < numPlayers; i++) {
-            view.getPlayerName(i + 1);
-            String playerName = keyboard.nextLine();
-            // create player objects through game or directly?
-            // add them to the game?
-        }
+        this.view.printConfirmationOfNumberPlayers(this.numPlayers);
     }
 
+    private void createPlayers() {
+        ArrayList<String> names = new ArrayList<>();
+        for (int i = 0; i < this.numPlayers; i++) {
+            this.view.getPlayerName(i + 1);
+            String playerName = getUserInputAsString();
+            while (names.contains(playerName)) {
+                getNonDuplicateName(i);
+            }
+            playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
+            names.add(playerName);
+        }
+        this.model = new BlackJackModel(names);
+        this.view.printPlayerNameConfirmation(names);
+    }
 
-    private void processPlayerTurn() {
-        // get current player from model
-//        view.printHand(get player hand, get current value, player);
-        view.printHitOrStandDialog();
-        String userInput = keyboard.next();
+    private void setDealer() {
+        this.dealer = model.getDealer();
+    }
+
+    private String getNonDuplicateName(int playerNumber) {
+        this.view.getUniqueNameAfterDuplicate(playerNumber);
+        return getUserInputAsString();
+    }
+
+    private String getUserInputAsString() {
+        return keyboard.nextLine().toLowerCase();
+    }
+
+    private void processPlayerTurn(Player player) {
+        this.view.displayPlayerHand(player);
+        this.view.printHitOrStandDialog();
+        String userInput = getUserInputAsString();
         if (userInput.equalsIgnoreCase("Q")) {
-            this.quitGame();
+            quitGame();
         }
         else if (userInput.equalsIgnoreCase("H")) {
-            this.hit();
+            playerHits(player);
         }
         else if (userInput.equalsIgnoreCase("S")) {
-            this.stand();
+            playerStands(player);
         }
         else {
-            view.printInvalidInput();
-            processPlayerTurn();
+            this.view.printInvalidInput();
+            processPlayerTurn(player);
         }
     }
 
-    private void hit() {
-        // send code to model to hit.
-        // Maybe print new card.
-        // view.printHand(get player hand, get current value, player);
-        // if player busts, hit bust
-        processPlayerTurn();
+    private void playerHits(Player player) {
+        this.model.playerHit(player);
+        this.view.printNewCard(player.getHand().getCard(-1), true);
+        this.view.displayHandValue(player);
+        processPlayerTurn(player);
     }
 
-    private void stand() {
-        view.printStandInformation();
-        // view.printHand(get player hand, get current value, player);
-        // send info back to the blackjack model.
+    private void playerStands(Player player) {
+        this.view.printStandInformation();
+        this.view.displayPlayerHand(player);
     }
 
-    private processDealerTurn() {
-        // code to have dealer take a turn
+    private void processDealerTurn() {
+        this.view.displayDealerHand(dealer);
+        dealerHits(dealer);
+        this.view.printDealerTurnOverDialog();
     }
 
-    private playGame() {
-        // iterate through players
-        // have players take their turn.
-        // have dealer take it's turn.
-//        view.printWinner(player);
+    private void dealerHits(Dealer dealer) {
+        this.model.playerHit(dealer);
+        processDealerTurn();
+    }
+
+    private void playGame() {
+        ArrayList<Player> players = this.model.getPlayers();
+        for (Player player : players) {
+            processPlayerTurn(player);
+        }
+        processDealerTurn();
+//        this.view.printWinner(player);
+    }
+
+    private void sendOutcomesToView() {
+//        HashMap outcomes = this.model.getOutcomes();
     }
 
     private void quitGame() {
