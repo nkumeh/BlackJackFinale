@@ -1,18 +1,17 @@
 /**
- * Abstract class for a Player. Every Player has a Hand and a currentHandValue.
+ * Abstract class for a Player. Every Player has a Hand and currentHandValue.
  */
 public abstract class AbstractPlayer {
     private Hand hand;
     private int currentHandValue;
     public static final int BLACKJACK = 21;
 
-
     /**
      * Constructor for an Abstract Player.
      */
     public AbstractPlayer() {
         this.hand = new Hand();
-        calculateHandValue();
+        this.calculateHandValue();
     }
 
     /**
@@ -21,7 +20,7 @@ public abstract class AbstractPlayer {
      */
     public AbstractPlayer(Hand dealtHand) {
         this.hand = dealtHand;
-        calculateHandValue();
+        this.calculateHandValue();
     }
 
     /**
@@ -29,6 +28,7 @@ public abstract class AbstractPlayer {
      * @return int - currentHandValue
      */
     public int getCurrentHandValue() {
+        this.calculateHandValue();
         return this.currentHandValue;
     }
 
@@ -59,7 +59,7 @@ public abstract class AbstractPlayer {
      * can utilize the method in hit methods.
      * @return true if the currentHandValue is over 21, false otherwise
      */
-    protected boolean isOver21() {
+    private boolean isOver21() {
         return this.currentHandValue > BLACKJACK;
     }
 
@@ -73,9 +73,9 @@ public abstract class AbstractPlayer {
      */
     private int calculateHardHandValue() {
         if (this.hasAce()) {
-            return calculateSoftHandValue() + 10;
+            return this.calculateSoftHandValue() + 10;
         } else {
-            return calculateSoftHandValue();
+            return this.calculateSoftHandValue();
         }
     }
 
@@ -97,22 +97,22 @@ public abstract class AbstractPlayer {
      * the Hand). Updates the currentHandValue instance.
      */
     public void calculateHandValue() {
-        if (isOver21())
+        this.currentHandValue = this.calculateHardHandValue();
+        if (this.isOver21())
             this.currentHandValue = this.calculateSoftHandValue();
-        else
-            this.currentHandValue = this.calculateHardHandValue();
     }
 
     /**
-     * Abstract hit method that all children should have.
+     * A player can hit if their total is under 21. Takes the top card from the
+     * deck and adds it to the player's hand. Recalculates the currentHandValue.
      * @param deck the Deck of cards being played with
+     * @throws IllegalStateException if the total is over 21
      */
-    public abstract void hit(Deck deck);
-
-    /**
-     * Method to stand. Does nothing.
-     */
-    public void stand() {
-        // do nothing
+    public void hit(Deck deck) throws IllegalStateException {
+        if (this.isOver21())
+            throw new IllegalStateException("Cannot hit if over 21.");
+        Card topCard = deck.takeTopCard();
+        this.getHand().add(topCard);
+        this.calculateHandValue();
     }
 }

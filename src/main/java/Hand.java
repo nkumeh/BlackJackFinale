@@ -6,58 +6,54 @@ import java.util.ArrayList;
  * This class utilizes the methods in the parent class.
  *
  * This class includes two constructors:
- *     The no-argument constructor creates an empty hand with a maxHandSize initialized to zero.
- *     The constructor that allows you to set the maxHandSize.
+ *     The no-argument constructor creates an empty hand with a handSize initialized to zero.
+ *     The constructor that allows you to set the handSize.
  */
 
 public class Hand extends Deck {
 
-    int maxHandSize;
+    int handSize;
 
     /**
      * This constructor creates an empty hand with 0 cards.
      */
     public Hand() {
         super(new ArrayList<>());
-        maxHandSize = 0;
+        handSize = 0;
     }
 
     /**
      * This constructor creates an empty hand with 0 cards.
      */
-    public Hand(int maxCards) {
+    public Hand(Deck deck, int handSize) {
         super(new ArrayList<>());
-        setHandSize(maxCards);
+        if (isValidHandSize(handSize) && handSize <= deck.size()) {
+            for (int i = 0; i < handSize; i++) {
+                this.add(deck.takeTopCard());
+            }
+        }
     }
 
     /**
-     * Getter method for the maxHandSize, the most cards one can add to a hand.
-     * @return maxHandSize (an int).
+     * Getter method for the number of cards in the hand.
+     * @return current handSize (an int).
      */
     public int getHandSize() {
-        return this.maxHandSize;
+        return this.getDeck().size();
     }
 
     /**
-     * This method allows you to set the maximum number of cards in a hand.
-     * @param newHandSize an integer
+     * This method checks whether the handSize is valid
+     * @param handSize an integer
      * @throws IllegalArgumentException if the maximum number of cards is less than 1 or greater than
      *                                  the maximum number of cards in a deck.
      */
-    public void setHandSize(int newHandSize) throws IllegalArgumentException {
-        if (newHandSize > 0 && newHandSize <= super.MAX_CARDS_IN_DECK) {
-            this.maxHandSize = newHandSize;
+    private boolean isValidHandSize(int handSize) throws IllegalArgumentException {
+        if (handSize >= 0 && handSize <= super.MAX_CARDS_IN_DECK) {
+            return true;
         }
-        else {
-            throw new IllegalArgumentException("Invalid Hand Size: " + newHandSize);
-        }
+        throw new IllegalArgumentException("Invalid Hand Size: " + handSize);
     }
-
-    @Override
-    boolean isFull() {
-        return this.size() >= maxHandSize;
-    }
-
 
     public static void main(String[] args) {
         // Create and shuffle a new deck.
@@ -67,14 +63,12 @@ public class Hand extends Deck {
         // Create two hands with 5 cards each. The assert statements
         // check that the card has been removed from the deck.
         int handSize = 5;
-        Hand myHand = new Hand(handSize);
-        Hand yourHand = new Hand(handSize);
+        Hand myHand = new Hand(myLuckyDeck, handSize);
+        Hand yourHand = new Hand(myLuckyDeck, handSize);
         for (int i = 0; i < handSize; i++) {
-            myHand.add(myLuckyDeck.takeTopCard());
             assert(!myLuckyDeck.hasCard(myHand.getCard(i)));
             assert(myHand.size() == i + 1);
 
-            yourHand.add(myLuckyDeck.takeTopCard());
             assert(!myLuckyDeck.hasCard(yourHand.getCard(i)));
             assert(yourHand.size() == i + 1);
         }
