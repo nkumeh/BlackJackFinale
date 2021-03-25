@@ -1,3 +1,10 @@
+package view;
+
+import model.AbstractPlayer;
+import model.Card;
+import model.Dealer;
+import model.Player;
+
 import java.util.ArrayList;
 
 /**
@@ -34,11 +41,11 @@ public class BlackJackView {
     /**
      * This method sets the number of players with a valid number based on user input.
      */
-    void getNumberOfPlayers() {
+    public void getNumberOfPlayers() {
         System.out.println("How many players will be playing (between 1 and 5)?");
     }
 
-    void printConfirmationOfNumberPlayers(int numPlayers) {
+    public void printConfirmationOfNumberPlayers(int numPlayers) {
         System.out.println("A BlackJack game has been created for " + numPlayers + "of players.");
     }
 
@@ -60,19 +67,6 @@ public class BlackJackView {
                 + playerNumber + " .");
     }
 
-//    /**
-//     * This method prints the hand information to the console.
-//     * @param player the player whose hand is getting printed.
-//     */
-//    public void displayHand(AbstractPlayer player) {
-//        createVisualHand(player);
-//        if player.getClass() == Dealer.class) {
-//            displayDealerHand(player);
-//        }
-//        else if (player.getClass() == Player.class) {
-//            displayPlayerHand(player);
-//        }
-//    }
     private VisualHand createVisualHand(AbstractPlayer player) {
         VisualHand currentHand;
         if (player.getClass().equals(Dealer.class)) {
@@ -115,11 +109,11 @@ public class BlackJackView {
         System.out.println("The Dealer's turn is over.");
     }
 
-    void printInvalidInput() {
+    public void printInvalidInput() {
         System.out.println("That input was invalid. Valid inputs are 'H', 'S', or 'Q'.");
     }
 
-    void printStandInformation() {
+    public void printStandInformation() {
         System.out.println("Your turn is over. Here's your current hand:");
     }
 
@@ -145,7 +139,7 @@ public class BlackJackView {
         System.out.println("Whoops! " + player.getName() + " bust.");
     }
 
-    private String getASCIIARTOutcome(Outcome outcome) {
+    private String getASCIIARTOutcome() {//Outcome outcome) {
         String bust =  """
             ____  _    _  _____ _______ 
            |  _ \\| |  | |/ ____|__   __|
@@ -173,12 +167,13 @@ public class BlackJackView {
                              __/ |                    
                             |___/    
          """;
-        return switch (outcome) {
-            case outcome.BUST -> bust;
-            case outcome.WIN -> win;
-            case outcome.TIE -> tie;
-            default -> "No ASCII ART FOR OUTCOME";
-        };
+//        return switch (outcome) {
+//            case outcome.BUST -> bust;
+//            case outcome.WIN -> win;
+//            case outcome.TIE -> tie;
+//            default -> "No ASCII ART FOR OUTCOME";
+//        };
+        return win; // this will be deleted when we have the switch.
     }
 
 

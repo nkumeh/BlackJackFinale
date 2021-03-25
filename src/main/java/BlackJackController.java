@@ -1,5 +1,11 @@
+import model.BlackJackModel;
+import model.Dealer;
+import model.Player;
+import view.BlackJackView;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 /**
  * This is the controller for the BlackJack Game. It handles the communication between the model
@@ -60,7 +66,7 @@ public class BlackJackController {
     }
 
     private void setDealer() {
-        this.dealer = model.getDealer();
+        this.dealer = this.model.getDealer();
     }
 
     private String getNonDuplicateName(int playerNumber) {
@@ -129,6 +135,11 @@ public class BlackJackController {
 
     private void quitGame() {
         System.exit(0);
+    }
+
+    public static void main(String[] args) {
+        BlackJackController newGame = new BlackJackController();
+//        newGame.startGame();
     }
 
 }
