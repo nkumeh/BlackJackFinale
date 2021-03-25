@@ -21,7 +21,6 @@ public class BlackJackModel {
         this.prepareDeck();
         this.addPlayers(playerNames);
         this.dealer = new Dealer();
-        currentPlayer = this.players.get(0);
     }
 
     /**
@@ -48,46 +47,52 @@ public class BlackJackModel {
      * This helper method deals an initial hand to a player.
      * @return
      */
-    private Hand dealInitialHand() {
-        return new Hand(2);
-    }
 
-    public playerHit(Player player) {
-        // if player currenthandvalue < 21
-        // player.hit
-        // else turn is over. change current player.
+
+    private Hand dealInitialHand() {
+        return new Hand(deck, 2);
+    }
+/*
+    public void playerHit (Player player) {
+         if player currenthandvalue < 21
+         player.hit
+         else turn is over. change current player.
     }
 
     public void findWinners() {
-        // Need to create Enum: Win, Lose, Tie
-        // iterate through players list to get current hand value
-        // if hasPlayerBusted()
-            // updateOutcomes(player, LOSE)
-        // else if hasDealerBusted()
-            // updateOutcomes(dealer, LOSE)
-        // else hasPlayerWon()
-            // updateOutcomes(player, Won)
-        // else hasPlayerTied()
-            // updateOutcomes(player, TIE)
-        // else
-            // updateOutcomes(player, LOSE)
+         Need to create Enum: Win, Lose, Tie
+         iterate through players list to get current hand value
+         if hasPlayerBusted()
+             updateOutcomes(player, LOSE)
+         else if hasDealerBusted()
+             updateOutcomes(dealer, LOSE)
+         else hasPlayerWon()
+             updateOutcomes(player, Won)
+         else hasPlayerTied()
+             updateOutcomes(player, TIE)
+         else
+             updateOutcomes(player, LOSE)
 
     }
 
     private boolean hasDealerBusted() {
-//        dealer.getCurrentHandValue() > 21;
+        dealer.getCurrentHandValue() > 21;
+        return true;
     }
 
     private boolean hasPlayerBusted(Player player) {
-//        currentPlayer.getCurrentHandValue() > 21;
+        currentPlayer.getCurrentHandValue() > 21;
+        return true;
     }
 
     private boolean hasPlayerWon(Player player) {
         // currentPlayer.getCurrentHandValue() > dealer.getCurrentHandValue()
+        return true;
     }
 
     private boolean hasPlayerTied(Player player) {
         // currentPlayer.getCurrentHandValue() == dealer.getCurrentHandValue()
+        return true;
     }
 
     private void updateOutcomes(Player player, Outcome outcome) {
@@ -97,5 +102,6 @@ public class BlackJackModel {
     public HashMap getOutcomes() {
 //        return the Hashmap;
     }
+    */
 
 }
