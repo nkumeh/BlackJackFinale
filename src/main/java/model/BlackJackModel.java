@@ -96,7 +96,7 @@ public class BlackJackModel {
             else if (hasPlayerWon(player)) {
                 updateOutcomes(player, Outcome.WIN);
             }
-            
+
             else if (hasPlayerTied(player)) {
                 updateOutcomes(player, Outcome.TIE);
             }
