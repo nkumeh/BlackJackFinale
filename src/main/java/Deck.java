@@ -58,7 +58,8 @@ public class Deck {
             throw new IllegalStateException("This deck is already full.");
         }
         else if (hasCard(newCard)) {
-            throw new IllegalArgumentException("This card is already in the Deck.");
+            throw new IllegalArgumentException("This card is already in the Deck. Suit: " + newCard.getSuit()
+                    + " name: " + newCard.getName());
         }
         this.deck.add(newCard);
     }
