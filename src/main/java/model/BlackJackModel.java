@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +13,7 @@ public class BlackJackModel {
     private Deck deck;
     private Dealer dealer;
     private ArrayList<Player> players;
-    private HashMap outcomes;
+    private HashMap<String, ArrayList> outcomes;
 
     /**
      * The constructor for BlackJack takes a list of player names(as Strings) and
@@ -44,23 +46,37 @@ public class BlackJackModel {
     }
 
     /**
+     * This method returns the players and their hands.
+     */
+    public ArrayList<Player> getPlayers() {
+        ArrayList<Player> playerListCopy = new ArrayList<>();
+        for (Player player : this.players) {
+            playerListCopy.add(player);
+        }
+        return playerListCopy;
+    }
+
+    public Dealer getDealer() {
+        return this.dealer;
+    }
+
+
+    /**
      * This helper method deals an initial hand to a player.
      * @return
      */
-
-
     private Hand dealInitialHand() {
         return new Hand(deck, 2);
     }
-/*
-    public void playerHit (Player player) {
-         if player currenthandvalue < 21
-         player.hit
-         else turn is over. change current player.
-    }
 
+    public void playerHit (AbstractPlayer player) {
+         if (player.getCurrentHandValue() < 21) {
+             player.hit(this.deck);
+         }
+    }
+/*
     public void findWinners() {
-         Need to create Enum: Win, Lose, Tie
+         setUpOutcomes();
          iterate through players list to get current hand value
          if hasPlayerBusted()
              updateOutcomes(player, LOSE)
@@ -73,6 +89,14 @@ public class BlackJackModel {
          else
              updateOutcomes(player, LOSE)
 
+    }
+
+    // if we decide to have the keys be the String for Winners, Losers, or Ties
+    private void setUpOutcomes() {
+         outcomes = new HashMap<String, ArrayList<String>();
+         outcomes.put("Winners");
+         outcomes.put("Losers";
+         outcome.put("Ties");
     }
 
     private boolean hasDealerBusted() {

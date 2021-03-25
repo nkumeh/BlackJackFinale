@@ -1,3 +1,5 @@
+package model;
+
 /**
  * A Dealer class that extends from an Abstract player. A Dealer can only hit
  * while they have less than 17.
