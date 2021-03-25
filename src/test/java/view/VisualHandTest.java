@@ -1,9 +1,6 @@
 package view;
 
-import model.Card;
-import model.Hand;
-import model.Name;
-import model.Suit;
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,12 +15,13 @@ public class VisualHandTest {
 
     @Before
     public void setUp() {
-        Hand smallHand = new Hand(2);
+        Deck deck = new Deck();
+        Hand smallHand = new Hand();
         smallHand.add(new Card(Suit.DIAMONDS, Name.TWO));
         smallHand.add(new Card(Suit.CLUBS, Name.ACE));
         blackjackHand = new VisualHand(smallHand, true);
 
-        Hand hand2 = new Hand(5);
+        Hand hand2 = new Hand();
         hand2.add(new Card(Suit.HEARTS, Name.QUEEN));
         hand2.add(new Card(Suit.SPADES, Name.KING));
         hand2.add(new Card(Suit.CLUBS, Name.TWO));
