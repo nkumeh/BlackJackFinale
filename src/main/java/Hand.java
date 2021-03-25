@@ -25,26 +25,21 @@ public class Hand extends Deck {
     /**
      * This constructor creates an empty hand with 0 cards.
      */
-    public Hand(int handSize) {
-        super(new ArrayList<>());
-        setHandSize(Hand.this.handSize);
-    }
-
-    /**
-     * This constructor creates an empty hand with 0 cards.
-     */
     public Hand(Deck deck, int handSize) {
         super(new ArrayList<>());
-        if (isValidHandSize(handSize) && handSize <= deck.size())
-            // Loop to add cards from deck into hand.
+        if (isValidHandSize(handSize) && handSize <= deck.size()) {
+            for (int i = 0; i < handSize; i++) {
+                this.add(deck.takeTopCard());
+            }
+        }
     }
 
     /**
-     * Getter method for the handSize, the most cards one can add to a hand.
-     * @return handSize (an int).
+     * Getter method for the number of cards in the hand.
+     * @return current handSize (an int).
      */
     public int getHandSize() {
-        return this.handSize;
+        return this.getDeck().size();
     }
 
     /**
@@ -68,14 +63,12 @@ public class Hand extends Deck {
         // Create two hands with 5 cards each. The assert statements
         // check that the card has been removed from the deck.
         int handSize = 5;
-        Hand myHand = new Hand(handSize);
-        Hand yourHand = new Hand(handSize);
+        Hand myHand = new Hand(myLuckyDeck, handSize);
+        Hand yourHand = new Hand(myLuckyDeck, handSize);
         for (int i = 0; i < handSize; i++) {
-            myHand.add(myLuckyDeck.takeTopCard());
             assert(!myLuckyDeck.hasCard(myHand.getCard(i)));
             assert(myHand.size() == i + 1);
 
-            yourHand.add(myLuckyDeck.takeTopCard());
             assert(!myLuckyDeck.hasCard(yourHand.getCard(i)));
             assert(yourHand.size() == i + 1);
         }

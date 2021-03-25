@@ -13,7 +13,7 @@ public class HandTest {
     public void setUp() {
         completeDeck = new Deck();
         player1Hand = new Hand();
-        player2Hand = new Hand(5);
+        player2Hand = new Hand(completeDeck, 5);
     }
 
     @Test
@@ -24,45 +24,13 @@ public class HandTest {
 
     @Test
     public void testHandSizeConstructor() {
-        assertEquals(0, player2Hand.size());
         assertEquals(5, player2Hand.getHandSize());
+        assertEquals(47, completeDeck.size());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testHandSizeConstructorThrowsExceptionForInvalidSize() {
-        new Hand(-2);
-    }
-
-    /**
-     * This test checks the getter method for the maxHandSize.
-     */
-    @Test
-    public void testGetMaxHandSize() {
-        assertEquals(0, player1Hand.getHandSize());
-        assertEquals(5, player2Hand.getHandSize());
-    }
-
-    /**
-     * This test checks that the setHandSize method accurately
-     * sets the hand size.
-     */
-    @Test
-    public void testSetMaxHandSize() {
-        assertEquals(0, player1Hand.getHandSize());
-        assertEquals(5, player2Hand.getHandSize());
-        player1Hand.setHandSize(10);
-        player2Hand.setHandSize(52);
-        assertEquals(10, player1Hand.getHandSize());
-        assertEquals(52, player2Hand.getHandSize());
-    }
-
-    /**
-     * This test checks that you cannot set the maxHandSize to a
-     * negative size.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetMaxHandSizeThrowsExceptionForNegativeSize() {
-        player2Hand.setHandSize(-2);
+    public void testHandConstructorThrowsExceptionForNegativeSize() {
+        new Hand(completeDeck, -2);
     }
 
     /**
@@ -70,8 +38,17 @@ public class HandTest {
      * invalid positive size.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetMaxHandSizeThrowsExceptionForInvalidSize() {
-        player1Hand.setHandSize(100);
+    public void testHandConstructorThrowsExceptionForInvalidSize() {
+        new Hand(completeDeck, 100);
+    }
+
+    /**
+     * This test checks the getter method for the maxHandSize.
+     */
+    @Test
+    public void testGetHandSize() {
+        assertEquals(0, player1Hand.getHandSize());
+        assertEquals(5, player2Hand.getHandSize());
     }
 
     /**
@@ -95,20 +72,21 @@ public class HandTest {
      */
     @Test
     public void testSortingOnHand() {
-        player1Hand.setHandSize(4);
-        player1Hand.add(new Card(Suit.DIAMONDS, Name.TWO));
-        player1Hand.add(new Card(Suit.CLUBS, Name.THREE));
-        player1Hand.add(new Card(Suit.HEARTS, Name.TWO));
-        player1Hand.add(new Card(Suit.SPADES, Name.THREE));
+        Hand newUnsortedHand = new Hand();
+        newUnsortedHand.add(new Card(Suit.DIAMONDS, Name.TWO));
+        newUnsortedHand.add(new Card(Suit.CLUBS, Name.THREE));
+        newUnsortedHand.add(new Card(Suit.HEARTS, Name.TWO));
+        newUnsortedHand.add(new Card(Suit.SPADES, Name.THREE));
 
         // Cards added in sorted order
-        player2Hand.add(new Card(Suit.DIAMONDS, Name.TWO));
-        player2Hand.add(new Card(Suit.HEARTS, Name.TWO));
-        player2Hand.add(new Card(Suit.CLUBS, Name.THREE));
-        player2Hand.add(new Card(Suit.SPADES, Name.THREE));
-        assertNotEquals(player2Hand.getDeck(), player1Hand.getDeck());
-        player1Hand.sort();
-        assertEquals(player2Hand.getDeck(), player1Hand.getDeck());
+        Hand newSortedHand = new Hand();
+        newSortedHand.add(new Card(Suit.DIAMONDS, Name.TWO));
+        newSortedHand.add(new Card(Suit.HEARTS, Name.TWO));
+        newSortedHand.add(new Card(Suit.CLUBS, Name.THREE));
+        newSortedHand.add(new Card(Suit.SPADES, Name.THREE));
+        assertNotEquals(newSortedHand.getDeck(), newUnsortedHand.getDeck());
+        newUnsortedHand.sort();
+        assertEquals(newSortedHand.getDeck(), newUnsortedHand.getDeck());
     }
 
 
