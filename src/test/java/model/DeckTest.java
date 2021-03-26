@@ -91,6 +91,19 @@ public class DeckTest {
     }
 
     /**
+     * This test confirms that the deck instance of the Deck points
+     * to a new ArrayList<Card> object
+     */
+    @Test
+    public void testShuffleNewArrayListObject() {
+        ArrayList<Card> oldDeckArrayList = completeDeck.getDeck();
+        int oldDeckHashCode = System.identityHashCode(oldDeckArrayList);
+        completeDeck.shuffle();
+        assertNotEquals(oldDeckArrayList, completeDeck.getDeck());
+        assertNotEquals(oldDeckHashCode, System.identityHashCode(completeDeck.getDeck()));
+    }
+
+    /**
      * This test checks that you can add a card to the deck.
      */
     @Test
