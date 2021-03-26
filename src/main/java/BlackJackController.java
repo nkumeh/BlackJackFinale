@@ -16,7 +16,7 @@ public class BlackJackController {
 
     private final BlackJackView view;
     private BlackJackModel model;
-    private Scanner keyboard;
+    private final Scanner keyboard;
     private Dealer dealer;
     private int numPlayers;
 
