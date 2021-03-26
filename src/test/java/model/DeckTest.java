@@ -67,12 +67,12 @@ public class DeckTest {
     @Test
     public void testShuffleReturnsNewOrdering() {
         Deck originalDeck = new Deck(completeDeck);
-        completeDeck.shuffle();
+        completeDeck.shuffleTest();
         assertNotEquals(Collections.singletonList(originalDeck.getDeck()),
                 Collections.singletonList(completeDeck.getDeck()));
 
         Deck originalDeck2 = new Deck(partialDeck);
-        partialDeck.shuffle();
+        partialDeck.shuffleTest();
         assertNotEquals(Collections.singletonList(originalDeck2.getDeck()),
                 Collections.singletonList(partialDeck.getDeck()));
     }
@@ -83,7 +83,7 @@ public class DeckTest {
      */
     @Test
     public void testShuffleContainsUniqueCards() {
-        completeDeck.shuffle();
+        completeDeck.shuffleTest();
         for (Card ignored : completeDeck.getDeck()) {
             Card removedCard = completeDeck.takeTopCard();
             assertFalse(completeDeck.hasCard(removedCard));

@@ -109,6 +109,19 @@ public class Deck {
     }
 
     /**
+     * This method is only used in testing.
+     */
+    void shuffleTest() {
+        ArrayList<Card> shuffledDeck = new ArrayList<>();
+        Random randomise = new Random(1);
+        while(!deck.isEmpty()) {
+            int random = randomise.nextInt(deck.size());
+            shuffledDeck.add(deck.remove(random));
+        }
+        this.deck = shuffledDeck;
+    }
+
+    /**
      * This method sorts cards first by the name and then the suit.
      * It sorts suits alphabetically: clubs, diamonds, hearts, and spades.
      * This is a destructive method. It alters the actual deck object.
