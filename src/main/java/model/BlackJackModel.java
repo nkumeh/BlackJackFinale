@@ -22,8 +22,9 @@ public class BlackJackModel {
      */
     public BlackJackModel(ArrayList<String> playerNames) {
         this.prepareDeck();
+        this.players = new ArrayList<>();
         this.addPlayers(playerNames);
-        this.dealer = new Dealer();
+        this.dealer = new Dealer(dealInitialHand());
     }
 
     /**
@@ -34,6 +35,10 @@ public class BlackJackModel {
         deck.shuffle();
     }
 
+    public Deck getDeck() {
+        return this.deck;
+    }
+
     /**
      * This method creates player objects from the names that were passed in to the
      * constructor and adds them to the list of players.
@@ -41,7 +46,7 @@ public class BlackJackModel {
      */
     private void addPlayers(ArrayList<String> playerNames) {
         for (String name : playerNames) {
-            players.add(new Player(name, this.dealInitialHand()));
+            this.players.add(new Player(name, this.dealInitialHand()));
         }
 
     }
@@ -55,6 +60,10 @@ public class BlackJackModel {
             playerListCopy.add(player);
         }
         return playerListCopy;
+    }
+
+    ArrayList<Player> getPlayersForTesting() {
+        return this.players;
     }
 
     public Dealer getDealer() {
@@ -71,9 +80,12 @@ public class BlackJackModel {
     }
 
     public void playerHit (AbstractPlayer player) {
-         if (player.getCurrentHandValue() < 21) {
-             player.hit(this.deck);
-         }
+        try {
+            player.hit(this.deck);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     /**
@@ -89,24 +101,23 @@ public class BlackJackModel {
     /**
      * This function checks the criteria for winning / losing for each player
      */
-    public void findWinners() {
+    public void getGameResults() {
         setUpOutcomes();
         for (Player player : players) {
             if (hasPlayerBusted(player)) {
                 updateOutcomes(player, Outcome.LOSE);
             }
             else if (hasDealerBusted()) {
-                if (hasPlayerBusted(player)) {
-                    updateOutcomes(player, Outcome.LOSE);
-                } else {
-                    updateOutcomes(player, Outcome.WIN);
-                }
+                updateOutcomes(player, Outcome.WIN);
             }
             else if (hasPlayerWon(player)) {
                 updateOutcomes(player, Outcome.WIN);
             }
             else if (hasPlayerTied(player)) {
                 updateOutcomes(player, Outcome.TIE);
+            }
+            else {
+                updateOutcomes(player, Outcome.LOSE);
             }
         }
     }
@@ -159,13 +170,6 @@ public class BlackJackModel {
      */
     public HashMap<String,Enum> getOutcomes() {
         return outcomes;
-    }
-
-    /**
-     * Enum function for the possible outcomes
-     */
-    enum Outcome {
-        WIN, LOSE, TIE
     }
 
 }
