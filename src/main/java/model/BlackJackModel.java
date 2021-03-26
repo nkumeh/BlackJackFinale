@@ -91,14 +91,14 @@ public class BlackJackModel {
      */
     public void findWinners() {
         setUpOutcomes();
-        for (Player player : this.players) {
+        for (Player player : players) {
             if (hasPlayerBusted(player)) {
                 updateOutcomes(player, Outcome.LOSE);
-            } else if (hasDealerBusted()) {
-                if (hasPlayerBusted(player)){
+            }
+            else if (hasDealerBusted()) {
+                if (hasPlayerBusted(player)) {
                     updateOutcomes(player, Outcome.LOSE);
-                }
-                else {
+                } else {
                     updateOutcomes(player, Outcome.WIN);
                 }
             }
