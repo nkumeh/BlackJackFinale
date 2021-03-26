@@ -76,15 +76,19 @@ public class BlackJackModel {
          }
     }
 
+    /**
+     * This function helps set up the outcome hashtable
+     */
     private void setUpOutcomes() {
-        // i think intellij allows to declare like ths because outcomes is
-        // declared at the beginning of the program
-        outcomes = new HashMap<>();
+        outcomes = new HashMap<String,Enum>();
         for (Player player : this.players) {
             outcomes.put(player.getName(), null);
         }
     }
 
+    /**
+     * This function checks the criteria for winning / losing for each player
+     */
     public void findWinners() {
         setUpOutcomes();
         for (Player player : this.players) {
@@ -107,35 +111,63 @@ public class BlackJackModel {
         }
     }
 
+    /**
+     * Boolean function to check if the dealer busted
+     * @return false otherwise
+     */
     private boolean hasDealerBusted() {
         return dealer.getCurrentHandValue() > 21;
     }
 
+    /**
+     * Boolean function to check if the player busted
+     * @return false otherwise
+     */
     private boolean hasPlayerBusted(Player player) {
         return player.getCurrentHandValue() > 21;
     }
 
+    /**
+     * Boolean function to check if the player won
+     * @return false otherwise
+     */
     private boolean hasPlayerWon(Player player) {
         return player.getCurrentHandValue() > dealer.getCurrentHandValue()
                 || hasDealerBusted();
     }
 
+    /**
+     * Boolean function to check if the game ended in a tie
+     * @return false otherwise
+     */
     private boolean hasPlayerTied(Player player) {
         return player.getCurrentHandValue() == dealer.getCurrentHandValue();
     }
 
+    /**
+     * This function is used to update the values of the hashmaps with their appropriate status
+     * @param player the current player
+     * @param status the players status
+     */
     private void updateOutcomes(Player player, Outcome status) {
         outcomes.put(player.getName(),status);
     }
 
+    /**
+     * Getter function for the hashmap
+     * @return the outcomes hashmaps
+     */
     public HashMap<String,Enum> getOutcomes() {
         return outcomes;
     }
 
+    /**
+     * Enum function for the possible outcomes
+     */
     enum Outcome {
         WIN, LOSE, TIE
     }
-
+    
 }
 
 
