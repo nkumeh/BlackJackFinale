@@ -60,7 +60,7 @@ public class BlackJackController {
             String playerName = getUserInputAsString();
             while (names.contains(playerName)) {
                 view.printGetNonDuplicateName(playerName);
-                playerName = getNonDuplicateName(i);
+                playerName = getNonDuplicateName(i+1);
             }
             playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
             names.add(playerName);
