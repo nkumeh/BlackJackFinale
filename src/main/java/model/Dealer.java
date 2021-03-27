@@ -40,7 +40,11 @@ public class Dealer extends AbstractPlayer {
      */
     @Override
     public void hit(Deck deck) throws IllegalStateException {
-        if (canHit())
+        if (canHit()) {
             super.hit(deck);
+        }
+        else {
+            throw new IllegalStateException("Cannot hit when over the threshold.");
+        }
     }
 }
