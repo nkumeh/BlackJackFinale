@@ -61,7 +61,7 @@ public abstract class AbstractPlayer {
      * can utilize the method in hit methods.
      * @return true if the currentHandValue is over 21, false otherwise
      */
-    private boolean isOver21() {
+    public boolean isOver21() {
         return this.currentHandValue > BLACKJACK;
     }
 

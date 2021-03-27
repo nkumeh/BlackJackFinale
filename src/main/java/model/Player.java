@@ -25,6 +25,15 @@ public class Player extends AbstractPlayer{
         return this.name;
     }
 
+
+    /**
+     * A method that returns if the player has blackjack
+     * @return true if the place has 21.
+     */
+    public boolean hasBlackjack() {
+        return this.getCurrentHandValue() == 21;
+    }
+
     /**
      * Player constructor calls Abstract constructor. Sets hand to the provided
      * hand and calculates the currentHandValue.
