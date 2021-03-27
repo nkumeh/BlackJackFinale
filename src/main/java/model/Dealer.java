@@ -29,18 +29,19 @@ public class Dealer extends AbstractPlayer {
      * under 17.
      * @return true if under 17, false otherwise
      */
-    private boolean canHit() {
+    public boolean canHit() {
         return this.getCurrentHandValue() < DEALER_MAX;
     }
 
     /**
      * Hits for the dealer until the dealer busts or has a currentHandValue >= 17
      * @param deck the Deck of cards being played with
-     * @throws IllegalStateException if the currentHandValue is over 21
+     * @throws IllegalStateException if the currentHandValue is over 21, in super.hit
      */
     @Override
     public void hit(Deck deck) throws IllegalStateException {
-        if (canHit())
+        if (canHit()) {
             super.hit(deck);
+        }
     }
 }

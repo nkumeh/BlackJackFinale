@@ -4,7 +4,7 @@ package model;
  * Abstract class for a Player. Every Player has a Hand and currentHandValue.
  */
 public abstract class AbstractPlayer {
-    private Hand hand;
+    private final Hand hand;
     private int currentHandValue;
     public static final int BLACKJACK = 21;
 
@@ -111,8 +111,8 @@ public abstract class AbstractPlayer {
      * @throws IllegalStateException if the total is over 21
      */
     public void hit(Deck deck) throws IllegalStateException {
-        if (this.isOver21())
-            throw new IllegalStateException("Cannot hit if over 21.");
+        if (this.currentHandValue >= 21)
+            throw new IllegalStateException("Cannot hit if at or over 21.");
         Card topCard = deck.takeTopCard();
         this.getHand().add(topCard);
         this.calculateHandValue();

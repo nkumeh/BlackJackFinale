@@ -1,11 +1,9 @@
 package view;
 
-import model.AbstractPlayer;
-import model.Card;
-import model.Dealer;
-import model.Player;
+import model.*;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class creates the view object for a BlackJack game.
@@ -13,10 +11,10 @@ import java.util.ArrayList;
 
 public class BlackJackView {
 
-    ArrayList<Player> players;
+//    ArrayList<Player> players;
 
     public BlackJackView() {
-        players = new ArrayList<>();
+//        players = new ArrayList<>();
     }
 
     /**
@@ -41,12 +39,19 @@ public class BlackJackView {
     /**
      * This method sets the number of players with a valid number based on user input.
      */
-    public void getNumberOfPlayers() {
+    public void printGetNumberOfPlayers() {
         System.out.println("How many players will be playing (between 1 and 5)?");
     }
 
+    /**
+     * This method sets the number of players with a valid number based on user input.
+     */
+    public void printGetNonDuplicateName(String playerName) {
+        System.out.println(playerName +" has already been entered. Please enter a unique name.");
+    }
+
     public void printConfirmationOfNumberPlayers(int numPlayers) {
-        System.out.println("A BlackJack game has been created for " + numPlayers + "of players.");
+        System.out.println("A BlackJack game has been created for " + numPlayers + " player(s).");
     }
 
 
@@ -126,62 +131,43 @@ public class BlackJackView {
         System.out.println(newCard.toString());
     }
 
-    public void printBust(Player player) {
-        String bust =  """
-            ____  _    _  _____ _______ 
-           |  _ \\| |  | |/ ____|__   __|
-           | |_) | |  | | (___    | |   
-           |  _ <| |  | |\\___ \\   | |   
-           | |_) | |__| |____) |  | |   
-           |____/ \\____/|_____/   |_| 
-    """;
-        System.out.println(bust);
-        System.out.println("Whoops! " + player.getName() + " bust.");
-    }
-
-    private String getASCIIARTOutcome() {//Outcome outcome) {
-        String bust =  """
-            ____  _    _  _____ _______ 
-           |  _ \\| |  | |/ ____|__   __|
-           | |_) | |  | | (___    | |   
-           |  _ <| |  | |\\___ \\   | |   
-           | |_) | |__| |____) |  | |   
-           |____/ \\____/|_____/   |_| 
+    private String getASCIIARTOutcome(String outcome) {
+        String loser =  """
+            _                     
+           | |                    
+           | | ___  ___  ___ _ __ 
+           | |/ _ \\/ __|/ _ \\ '__|
+           | | (_) \\__ \\  __/ |   
+           |_|\\___/|___/\\___|_| 
         """;
         String tie = """
-             _______ _      
-            |__   __(_)     
-               | |   _  ___ 
-               | |  | |/ _ \\
-               | |  | |  __/
-               |_|  |_|\\___|
-             }
+            _   _      
+           | | (_)     
+           | |_ _  ___ 
+           | __| |/ _ \\
+           | |_| |  __/
+            \\__|_|\\___|
         """;
-        String win = """
-            _____                            _       _ 
-          / ____|                          | |     | |
-         | |     ___  _ __   __ _ _ __ __ _| |_ ___| |
-         | |    / _ \\| '_ \\ / _` | '__/ _` | __/ __| |
-         | |___| (_) | | | | (_| | | | (_| | |_\\__ \\_|
-          \\_____\\___/|_| |_|\\__, |_|  \\__,_|\\__|___(_)
-                             __/ |                    
-                            |___/    
+        String winner = """
+                     _                       
+                    (_)                      
+           __      ___ _ __  _ __   ___ _ __ 
+           \\ \\ /\\ / / | '_ \\| '_ \\ / _ \\ '__|
+            \\ V  V /| | | | | | | |  __/ |   
+             \\_/\\_/ |_|_| |_|_| |_|\\___|_|   
+                                                            
+              
          """;
-//        return switch (outcome) {
-//            case outcome.BUST -> bust;
-//            case outcome.WIN -> win;
-//            case outcome.TIE -> tie;
-//            default -> "No ASCII ART FOR OUTCOME";
-//        };
-        return win; // this will be deleted when we have the switch.
+        return switch (outcome) {
+            case "loser" -> loser;
+            case "winner" -> winner;
+            case "tie" -> tie;
+            default -> "No ASCII ART FOR OUTCOME";
+        };
     }
 
 
-    /**
-     * This method prints the winner information to the dialog.
-     * @param player the winner of the game.
-     */
-    public void printWinners(AbstractPlayer player) {
+    public void printResults(Set<String> winners, Set<String> losers, Set<String> ties) {
         String gameOver = """
                   _____                                                                               
                  / ____|                                           
@@ -190,12 +176,20 @@ public class BlackJackView {
                 | |__| | (_| | | | | | |  __/ | (_) \\ V /  __/ |   
                  \\_____|\\__,_|_| |_| |_|\\___|  \\___/ \\_/ \\___|_|             
                           """;
-        if (player.getClass().equals(Dealer.class)) {
-            System.out.println(gameOver);
-        }
-        else {
-//            System.out.println(congrats);
-//            System.out.println(player.name() + "Beat the dealer!");
+        System.out.println(gameOver);
+        System.out.println("\n");
+        displayPlayerResults(winners, "winner");
+        displayPlayerResults(ties, "tie");
+        displayPlayerResults(losers, "loser");
+    }
+
+    private void displayPlayerResults(Set<String> playerNames, String outcome) {
+        if (playerNames.size() > 0) {
+            System.out.println(getASCIIARTOutcome(outcome));
+            System.out.println("The " + outcome + "(s): ");
+            for (String playerName: playerNames) {
+                System.out.print(playerName + "\t");
+            }
         }
     }
 }

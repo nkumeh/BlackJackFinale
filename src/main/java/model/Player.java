@@ -5,7 +5,7 @@ package model;
  */
 public class Player extends AbstractPlayer{
 
-    private String name;
+    private final String name;
 
     /**
      * Player constructor calls Abstract constructor. Sets empty Hand and a
