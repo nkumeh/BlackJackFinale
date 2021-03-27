@@ -5,6 +5,7 @@ import model.Player;
 import view.BlackJackView;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -20,13 +21,13 @@ public class BlackJackController {
     private Dealer dealer;
     private int numPlayers;
 
-    public BlackJackController() {
+    public BlackJackController() throws InterruptedException {
         this.view = new BlackJackView();
         this.keyboard = new Scanner(System.in);
         startGame();
     }
 
-    public void startGame() {
+    public void startGame() throws InterruptedException {
         this.view.printInstructions();
         String userInput = getUserInputAsString();
         if (!userInput.equalsIgnoreCase("Q")) {
@@ -58,11 +59,11 @@ public class BlackJackController {
         for (int i = 0; i < this.numPlayers; i++) {
             this.view.getPlayerName(i + 1);
             String playerName = getUserInputAsString();
+            playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
             while (names.contains(playerName)) {
                 view.printGetNonDuplicateName(playerName);
                 playerName = getNonDuplicateName(i+1);
             }
-            playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
             names.add(playerName);
         }
         this.model = new BlackJackModel(names);
@@ -82,9 +83,19 @@ public class BlackJackController {
         return keyboard.next().toLowerCase();
     }
 
-    private void processPlayerTurn(Player player) {
+    private void processPlayerTurn(Player player) throws InterruptedException {
+        this.view.displayDealerHand(dealer);
         this.view.displayPlayerHand(player);
-        // ADD if statement if the player has blackjack, go to the next turn
+        if (player.hasBlackjack()) {
+            this.view.printPlayerBlackjackDialog();
+            TimeUnit.SECONDS.sleep(2);
+            return;
+        }
+        if (player.isOver21()) {
+            this.view.printBust();
+            TimeUnit.SECONDS.sleep(2);
+            return;
+        }
         this.view.printHitOrStandDialog();
         String userInput = getUserInputAsString();
         if (userInput.equalsIgnoreCase("Q")) {
@@ -102,8 +113,9 @@ public class BlackJackController {
         }
     }
 
-    private void playerHits(Player player) {
+    private void playerHits(Player player) throws InterruptedException {
         this.view.printNewCard(model.getDeck().getCard(0), true);
+        TimeUnit.SECONDS.sleep(2);
         this.model.playerHit(player);
         this.view.displayHandValue(player);
         processPlayerTurn(player);
@@ -116,18 +128,17 @@ public class BlackJackController {
 
     private void processDealerTurn() {
         while (dealer.canHit()) {
-            this.view.displayDealerHand(dealer);
+            this.view.displayDealerLastHand(dealer);
             dealerHits(dealer);
         }
-        this.view.printDealerTurnOverDialog();
-        dealerHits(dealer);
+        this.view.printDealerTurnOverDialog(dealer);
     }
 
     private void dealerHits(Dealer dealer) {
         this.model.playerHit(dealer);
     }
 
-    private void playGame() {
+    private void playGame() throws InterruptedException {
         ArrayList<Player> players = this.model.getPlayers();
         for (Player player : players) {
             processPlayerTurn(player);
@@ -160,7 +171,7 @@ public class BlackJackController {
         System.exit(0);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new BlackJackController();
     }
 

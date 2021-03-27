@@ -55,8 +55,9 @@ public class VisualHand {
      * @param visible a boolean True if the card information is visible, else false.
      */
     private void createVisualCardsFromHand(boolean visible) {
-        for (int i = 0; i < this.handSize; i++) {
-            visualCards[i] = new VisualCard(hand.getCard(i), visible);
+        visualCards[0] = new VisualCard(hand.getCard(0), visible);
+        for (int i = 1; i < this.handSize; i++) {
+            visualCards[i] = new VisualCard(hand.getCard(i), true);
         }
     }
 

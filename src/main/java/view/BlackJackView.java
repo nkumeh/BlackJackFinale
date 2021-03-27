@@ -11,10 +11,7 @@ import java.util.Set;
 
 public class BlackJackView {
 
-//    ArrayList<Player> players;
-
     public BlackJackView() {
-//        players = new ArrayList<>();
     }
 
     /**
@@ -83,6 +80,15 @@ public class BlackJackView {
         return currentHand;
     }
 
+    private VisualHand createDealerTurnHand(Dealer dealer) {
+        return new VisualHand(dealer.getHand(), true);
+    }
+
+    public void displayDealerLastHand(Dealer dealer) {
+        System.out.println("The Dealer's Hand\n");
+        System.out.println(createDealerTurnHand(dealer));
+    }
+
     public void displayDealerHand(Dealer dealer) {
         System.out.println("The Dealer's Hand\n");
         VisualHand dealersHand = createVisualHand(dealer);
@@ -110,7 +116,16 @@ public class BlackJackView {
         System.out.println(options);
     }
 
-    public void printDealerTurnOverDialog() {
+    public void printPlayerBlackjackDialog() {
+        System.out.println("Congrats, you have Blackjack (or 21)!");
+    }
+
+    public void printBust() {
+        System.out.println("Whoops! You bust! ");
+    }
+
+    public void printDealerTurnOverDialog(Dealer dealer) {
+        displayDealerLastHand(dealer);
         System.out.println("The Dealer's turn is over.");
     }
 
