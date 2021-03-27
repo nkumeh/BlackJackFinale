@@ -43,11 +43,12 @@ public class BlackJackController {
     private void setUpPlayers() {
         this.view.getNumberOfPlayers();
         int numberOfPlayers = keyboard.nextInt();
-        System.out.println("just finished assigning number of players.");
         while (numberOfPlayers < 1 || numberOfPlayers > 5) {
             System.out.println("Please enter a number between 1 and 5.");
             numberOfPlayers = keyboard.nextInt();
         }
+        this.keyboard.nextLine();
+        System.out.println("Assigned " + numberOfPlayers + " players.");
         this.numPlayers = numberOfPlayers;
         this.view.printConfirmationOfNumberPlayers(this.numPlayers);
     }
@@ -56,14 +57,12 @@ public class BlackJackController {
         ArrayList<String> names = new ArrayList<>();
         for (int i = 0; i < this.numPlayers; i++) {
             this.view.getPlayerName(i + 1);
-            String playerName = keyboard.nextLine();
-            playerName = playerName.toLowerCase();
-            System.out.println(playerName);
+            String playerName = getUserInputAsString();
             while (names.contains(playerName)) {
                 System.out.println("nonduplicate " + playerName);
-                playerName = getNonDuplicateName(i);
+                playerName = getNonDuplicateName(i+1);
             }
-            System.out.println("About to add "+ playerName + "to list");
+            System.out.println("About to add "+ playerName + " to list");
 //            playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
             names.add(playerName);
         }
@@ -87,6 +86,7 @@ public class BlackJackController {
 
     private void processPlayerTurn(Player player) {
         this.view.displayPlayerHand(player);
+        // ADD if statement if the player has blackjack, go to the next turn
         this.view.printHitOrStandDialog();
         String userInput = getUserInputAsString();
         if (userInput.equalsIgnoreCase("Q")) {
@@ -105,8 +105,8 @@ public class BlackJackController {
     }
 
     private void playerHits(Player player) {
+        this.view.printNewCard(model.getDeck().getCard(0), true);
         this.model.playerHit(player);
-        this.view.printNewCard(player.getHand().getCard(-1), true);
         this.view.displayHandValue(player);
         processPlayerTurn(player);
     }
@@ -117,14 +117,15 @@ public class BlackJackController {
     }
 
     private void processDealerTurn() {
-        this.view.displayDealerHand(dealer);
-        dealerHits(dealer);
+        while (dealer.canHit()) {
+            this.view.displayDealerHand(dealer);
+            dealerHits(dealer);
+        }
         this.view.printDealerTurnOverDialog();
     }
 
     private void dealerHits(Dealer dealer) {
         this.model.playerHit(dealer);
-        processDealerTurn();
     }
 
     private void playGame() {
@@ -134,6 +135,7 @@ public class BlackJackController {
         }
         processDealerTurn();
         processOutcomes();
+        quitGame();
     }
 
     private void processOutcomes() {
@@ -160,8 +162,7 @@ public class BlackJackController {
     }
 
     public static void main(String[] args) {
-        BlackJackController newGame = new BlackJackController();
-        newGame.startGame();
+        new BlackJackController();
     }
 
 }

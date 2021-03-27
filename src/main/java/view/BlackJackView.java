@@ -44,7 +44,7 @@ public class BlackJackView {
     }
 
     public void printConfirmationOfNumberPlayers(int numPlayers) {
-        System.out.println("A BlackJack game has been created for " + numPlayers + "of players.");
+        System.out.println("A BlackJack game has been created for " + numPlayers + " players.");
     }
 
 
