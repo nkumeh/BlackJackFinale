@@ -11,8 +11,8 @@ import java.util.HashMap;
 public class BlackJackModel {
 
     private Deck deck;
-    private Dealer dealer;
-    private ArrayList<Player> players;
+    private final Dealer dealer;
+    private final ArrayList<Player> players;
     private HashMap<String,Enum> outcomes;
 
 
@@ -35,9 +35,14 @@ public class BlackJackModel {
         deck.shuffle();
     }
 
-    public Deck getDeck() {
-        return this.deck;
+    /**
+     * This helper method deals an initial hand to a player.
+     * @return the hand of the player
+     */
+    private Hand dealInitialHand() {
+        return new Hand(deck, 2);
     }
+
 
     /**
      * This method creates player objects from the names that were passed in to the
@@ -48,7 +53,6 @@ public class BlackJackModel {
         for (String name : playerNames) {
             this.players.add(new Player(name, this.dealInitialHand()));
         }
-
     }
 
     /**
@@ -56,29 +60,42 @@ public class BlackJackModel {
      */
     public ArrayList<Player> getPlayers() {
         ArrayList<Player> playerListCopy = new ArrayList<>();
-        for (Player player : this.players) {
-            playerListCopy.add(player);
-        }
+        playerListCopy.addAll(this.players);
         return playerListCopy;
     }
 
+    /**
+     * This method returns the actual list of players in the game
+     * versus a copy so that we can modify the hands for testing purposes.
+     * @return an arraylist of Player objects.
+     */
     ArrayList<Player> getPlayersForTesting() {
         return this.players;
     }
 
+    /**
+     * This is the getter method for the deck class and is used
+     * primarily for testing.
+     * @return the Deck that is being used in the game.
+     */
+    Deck getDeck() {
+        return this.deck;
+    }
+
+    /**
+     * This is the getter method for the Dealer object.
+     * @return the Dealer object for the game.
+     */
     public Dealer getDealer() {
         return this.dealer;
     }
 
-
     /**
-     * This helper method deals an initial hand to a player.
-     * @return the hand of the player
+     * This method accepts a Player or Dealer object. If the
+     * player object can hit, it does so. If not, it catches
+     * the exception which gets printed to the screen.
+     * @param player an instance of an AbstractPlayer (player or dealer).
      */
-    private Hand dealInitialHand() {
-        return new Hand(deck, 2);
-    }
-
     public void playerHit (AbstractPlayer player) {
         try {
             player.hit(this.deck);
@@ -89,17 +106,9 @@ public class BlackJackModel {
     }
 
     /**
-     * This function helps set up the outcome hashtable
-     */
-    private void setUpOutcomes() {
-        outcomes = new HashMap<String,Enum>();
-        for (Player player : this.players) {
-            outcomes.put(player.getName(), null);
-        }
-    }
-
-    /**
-     * This function checks the criteria for winning / losing for each player
+     * This function checks the criteria for winning / losing
+     * for each player and calls the updateOutcomes method
+     * to assign an outcome for each player.
      */
     public void getGameResults() {
         setUpOutcomes();
@@ -107,7 +116,7 @@ public class BlackJackModel {
             if (hasPlayerBusted(player)) {
                 updateOutcomes(player, Outcome.LOSE);
             }
-            else if (hasDealerBusted()) {
+            else if (hasPlayerBusted(dealer)) {
                 updateOutcomes(player, Outcome.WIN);
             }
             else if (hasPlayerWon(player)) {
@@ -123,53 +132,59 @@ public class BlackJackModel {
     }
 
     /**
-     * Boolean function to check if the dealer busted
-     * @return false otherwise
+     * Getter function for the outcomes hashmap
+     * @return the outcomes hashmap with results of the
+     * game.
      */
-    private boolean hasDealerBusted() {
-        return dealer.getCurrentHandValue() > 21;
+    public HashMap<String,Enum> getOutcomes() {
+        return outcomes;
     }
 
     /**
-     * Boolean function to check if the player busted
-     * @return false otherwise
+     * This function helps sets up the outcomes HashMap with
+     * the name of the players and initializes the result to null.
      */
-    private boolean hasPlayerBusted(Player player) {
+    private void setUpOutcomes() {
+        outcomes = new HashMap<String,Enum>();
+        for (Player player : this.players) {
+            outcomes.put(player.getName(), null);
+        }
+    }
+
+    /**
+     * This private helper function assesses whether an instance of player
+     * (Dealer or player) busted.
+     * @return true if the player busted, else false.
+     */
+    private boolean hasPlayerBusted(AbstractPlayer player) {
         return player.getCurrentHandValue() > 21;
     }
 
     /**
-     * Boolean function to check if the player won
-     * @return false otherwise
+     * This private helper function determines whether a player won the game.
+     * @return true if the player won, else false.
      */
     private boolean hasPlayerWon(Player player) {
         return player.getCurrentHandValue() > dealer.getCurrentHandValue()
-                || hasDealerBusted();
+                || hasPlayerBusted(dealer);
     }
 
     /**
-     * Boolean function to check if the game ended in a tie
-     * @return false otherwise
+     * This private helper function determines whether a player tied with the dealer.
+     * @return true if the player tied, else false.
      */
     private boolean hasPlayerTied(Player player) {
         return player.getCurrentHandValue() == dealer.getCurrentHandValue();
     }
 
     /**
-     * This function is used to update the values of the hashmaps with their appropriate status
+     * This function is used to update the values of the hashmaps with
+     * the results of the game.
      * @param player the current player
      * @param status the players status
      */
     private void updateOutcomes(Player player, Outcome status) {
         outcomes.put(player.getName(),status);
-    }
-
-    /**
-     * Getter function for the hashmap
-     * @return the outcomes hashmaps
-     */
-    public HashMap<String,Enum> getOutcomes() {
-        return outcomes;
     }
 
 }
