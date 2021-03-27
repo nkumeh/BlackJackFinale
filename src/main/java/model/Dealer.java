@@ -43,5 +43,8 @@ public class Dealer extends AbstractPlayer {
         if (canHit()) {
             super.hit(deck);
         }
+        else {
+            throw new IllegalStateException("Cannot hit when over the threshold.");
+        }
     }
 }
