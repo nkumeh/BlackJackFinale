@@ -41,10 +41,10 @@ public class BlackJackController {
     }
 
     private void setUpPlayers() {
-        this.view.getNumberOfPlayers();
+        view.printGetNumberOfPlayers();
         int numberOfPlayers = keyboard.nextInt();
         while (numberOfPlayers < 1 || numberOfPlayers > 5) {
-            System.out.println("Please enter a number between 1 and 5.");
+            view.printGetNumberOfPlayers();
             numberOfPlayers = keyboard.nextInt();
         }
         this.keyboard.nextLine();
@@ -59,14 +59,12 @@ public class BlackJackController {
             this.view.getPlayerName(i + 1);
             String playerName = getUserInputAsString();
             while (names.contains(playerName)) {
-                System.out.println("nonduplicate " + playerName);
-                playerName = getNonDuplicateName(i+1);
+                view.printGetNonDuplicateName(playerName);
+                playerName = getNonDuplicateName(i);
             }
-            System.out.println("About to add "+ playerName + " to list");
-//            playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
+            playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
             names.add(playerName);
         }
-        System.out.println("Creating new model");
         this.model = new BlackJackModel(names);
         this.view.printPlayerNameConfirmation(names);
     }
@@ -81,7 +79,7 @@ public class BlackJackController {
     }
 
     private String getUserInputAsString() {
-        return keyboard.nextLine().toLowerCase();
+        return keyboard.next().toLowerCase();
     }
 
     private void processPlayerTurn(Player player) {
@@ -122,6 +120,7 @@ public class BlackJackController {
             dealerHits(dealer);
         }
         this.view.printDealerTurnOverDialog();
+        dealerHits(dealer);
     }
 
     private void dealerHits(Dealer dealer) {
