@@ -4,7 +4,7 @@ package model;
  * Abstract class for a Player. Every Player has a Hand and currentHandValue.
  */
 public abstract class AbstractPlayer {
-    private Hand hand;
+    private final Hand hand;
     private int currentHandValue;
     public static final int BLACKJACK = 21;
 

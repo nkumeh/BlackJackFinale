@@ -9,9 +9,6 @@ import java.util.HashMap;
 import static org.junit.Assert.*;
 
 public class BlackJackModelTest {
-    private ArrayList<String> playerNames1;
-    private ArrayList<String> playerNames2;
-    private HashMap<String,Enum> endOutcomes = new HashMap<>();
     private BlackJackModel game1;
     private BlackJackModel game2;
     private BlackJackModel game3;
@@ -30,6 +27,8 @@ public class BlackJackModelTest {
 
     @Before
     public void setUp() {
+        ArrayList<String> playerNames1;
+        ArrayList<String> playerNames2;
         playerNames1 = new ArrayList<>();
         playerNames1.add("Elsa Anna");
         playerNames2 = new ArrayList<>();

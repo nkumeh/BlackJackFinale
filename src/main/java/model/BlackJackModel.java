@@ -59,9 +59,7 @@ public class BlackJackModel {
      * This method returns the players and their hands.
      */
     public ArrayList<Player> getPlayers() {
-        ArrayList<Player> playerListCopy = new ArrayList<>();
-        playerListCopy.addAll(this.players);
-        return playerListCopy;
+        return new ArrayList<>(this.players);
     }
 
     /**
@@ -145,7 +143,7 @@ public class BlackJackModel {
      * the name of the players and initializes the result to null.
      */
     private void setUpOutcomes() {
-        outcomes = new HashMap<String,Enum>();
+        outcomes = new HashMap<>();
         for (Player player : this.players) {
             outcomes.put(player.getName(), null);
         }
