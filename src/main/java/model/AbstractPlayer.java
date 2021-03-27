@@ -111,8 +111,8 @@ public abstract class AbstractPlayer {
      * @throws IllegalStateException if the total is over 21
      */
     public void hit(Deck deck) throws IllegalStateException {
-        if (this.isOver21())
-            throw new IllegalStateException("Cannot hit if over 21.");
+        if (this.currentHandValue >= 21)
+            throw new IllegalStateException("Cannot hit if at or over 21.");
         Card topCard = deck.takeTopCard();
         this.getHand().add(topCard);
         this.calculateHandValue();
