@@ -138,6 +138,24 @@ public class BlackJackModelTest {
     }
 
     @Test
+    public void testConstructorCreatesDealers() {
+        assertEquals(dealer1, game1.getDealer());
+        assertEquals(dealer2, game2.getDealer());
+        assertEquals(dealer3, game3.getDealer());
+    }
+
+    @Test
+    public void testGetPlayersReturnsDifferentObjectWithSameValues() {
+        assertNotSame(game1.getPlayers(), game1.getPlayersForTesting());
+        assertNotSame(game2.getPlayers(), game2.getPlayersForTesting());
+        assertNotSame(game3.getPlayers(), game3.getPlayersForTesting());
+        assertEquals(game1.getPlayers(), game1.getPlayersForTesting());
+        assertEquals(game2.getPlayers(), game2.getPlayersForTesting());
+        assertEquals(game3.getPlayers(), game3.getPlayersForTesting());
+
+    }
+
+    @Test
     public void testPlayersCanHit() {
         game2Player3.getHand().add(new Card(Suit.CLUBS, Name.THREE));
         game2Player3.getHand().add(new Card(Suit.SPADES, Name.THREE));
