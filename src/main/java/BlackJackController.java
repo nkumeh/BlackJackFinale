@@ -47,6 +47,8 @@ public class BlackJackController {
             view.printGetNumberOfPlayers();
             numberOfPlayers = keyboard.nextInt();
         }
+        this.keyboard.nextLine();
+        System.out.println("Assigned " + numberOfPlayers + " players.");
         this.numPlayers = numberOfPlayers;
         this.view.printConfirmationOfNumberPlayers(this.numPlayers);
     }
@@ -58,7 +60,7 @@ public class BlackJackController {
             String playerName = getUserInputAsString();
             while (names.contains(playerName)) {
                 view.printGetNonDuplicateName(playerName);
-                playerName = getNonDuplicateName(i);
+                playerName = getNonDuplicateName(i+1);
             }
             playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
             names.add(playerName);
@@ -82,6 +84,7 @@ public class BlackJackController {
 
     private void processPlayerTurn(Player player) {
         this.view.displayPlayerHand(player);
+        // ADD if statement if the player has blackjack, go to the next turn
         this.view.printHitOrStandDialog();
         String userInput = getUserInputAsString();
         if (userInput.equalsIgnoreCase("Q")) {
@@ -100,9 +103,8 @@ public class BlackJackController {
     }
 
     private void playerHits(Player player) {
+        this.view.printNewCard(model.getDeck().getCard(0), true);
         this.model.playerHit(player);
-        int lastCard = player.getHand().getHandSize() - 1;
-        this.view.printNewCard(player.getHand().getCard(lastCard), true);
         this.view.displayHandValue(player);
         processPlayerTurn(player);
     }
@@ -113,18 +115,16 @@ public class BlackJackController {
     }
 
     private void processDealerTurn() {
-        this.view.displayDealerHand(dealer);
+        while (dealer.canHit()) {
+            this.view.displayDealerHand(dealer);
+            dealerHits(dealer);
+        }
         this.view.printDealerTurnOverDialog();
         dealerHits(dealer);
     }
 
     private void dealerHits(Dealer dealer) {
-        int currentScore = dealer.getCurrentHandValue();
-        processDealerTurn();
-        if (currentScore < 17) {
-            this.model.playerHit(dealer);
-            processDealerTurn();
-        }
+        this.model.playerHit(dealer);
     }
 
     private void playGame() {
@@ -134,6 +134,7 @@ public class BlackJackController {
         }
         processDealerTurn();
         processOutcomes();
+        quitGame();
     }
 
     private void processOutcomes() {
@@ -160,8 +161,7 @@ public class BlackJackController {
     }
 
     public static void main(String[] args) {
-        BlackJackController newGame = new BlackJackController();
-        newGame.startGame();
+        new BlackJackController();
     }
 
 }

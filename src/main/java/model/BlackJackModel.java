@@ -40,7 +40,7 @@ public class BlackJackModel {
      * @return the hand of the player
      */
     private Hand dealInitialHand() {
-        return new Hand(deck, 2);
+        return new Hand(this.deck, 2);
     }
 
 
@@ -76,7 +76,7 @@ public class BlackJackModel {
      * primarily for testing.
      * @return the Deck that is being used in the game.
      */
-    Deck getDeck() {
+    public Deck getDeck() {
         return this.deck;
     }
 
@@ -135,6 +135,7 @@ public class BlackJackModel {
      * game.
      */
     public HashMap<String,Enum> getOutcomes() {
+        getGameResults();
         return outcomes;
     }
 
