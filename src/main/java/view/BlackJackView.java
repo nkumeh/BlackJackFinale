@@ -39,12 +39,19 @@ public class BlackJackView {
     /**
      * This method sets the number of players with a valid number based on user input.
      */
-    public void getNumberOfPlayers() {
+    public void printGetNumberOfPlayers() {
         System.out.println("How many players will be playing (between 1 and 5)?");
     }
 
+    /**
+     * This method sets the number of players with a valid number based on user input.
+     */
+    public void printGetNonDuplicateName(String playerName) {
+        System.out.println(playerName +" has already been entered. Please enter a unique name.");
+    }
+
     public void printConfirmationOfNumberPlayers(int numPlayers) {
-        System.out.println("A BlackJack game has been created for " + numPlayers + "of players.");
+        System.out.println("A BlackJack game has been created for " + numPlayers + " player(s).");
     }
 
 
