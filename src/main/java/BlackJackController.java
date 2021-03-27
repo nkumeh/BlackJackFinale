@@ -1,10 +1,10 @@
 import model.BlackJackModel;
 import model.Dealer;
+import model.Outcome;
 import model.Player;
 import view.BlackJackView;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 
 /**
@@ -42,11 +42,13 @@ public class BlackJackController {
 
     private void setUpPlayers() {
         this.view.getNumberOfPlayers();
-        this.numPlayers = keyboard.nextInt();
-        while (this.numPlayers < 1 || this.numPlayers > 5) {
+        int numberOfPlayers = keyboard.nextInt();
+        System.out.println("just finished assigning number of players.");
+        while (numberOfPlayers < 1 || numberOfPlayers > 5) {
             System.out.println("Please enter a number between 1 and 5.");
-            this.numPlayers = keyboard.nextInt();
+            numberOfPlayers = keyboard.nextInt();
         }
+        this.numPlayers = numberOfPlayers;
         this.view.printConfirmationOfNumberPlayers(this.numPlayers);
     }
 
@@ -54,13 +56,18 @@ public class BlackJackController {
         ArrayList<String> names = new ArrayList<>();
         for (int i = 0; i < this.numPlayers; i++) {
             this.view.getPlayerName(i + 1);
-            String playerName = getUserInputAsString();
+            String playerName = keyboard.nextLine();
+            playerName = playerName.toLowerCase();
+            System.out.println(playerName);
             while (names.contains(playerName)) {
-                getNonDuplicateName(i);
+                System.out.println("nonduplicate " + playerName);
+                playerName = getNonDuplicateName(i);
             }
-            playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
+            System.out.println("About to add "+ playerName + "to list");
+//            playerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1);
             names.add(playerName);
         }
+        System.out.println("Creating new model");
         this.model = new BlackJackModel(names);
         this.view.printPlayerNameConfirmation(names);
     }
@@ -126,11 +133,26 @@ public class BlackJackController {
             processPlayerTurn(player);
         }
         processDealerTurn();
-//        this.view.printWinner(player);
+        processOutcomes();
     }
 
-    private void sendOutcomesToView() {
-//        HashMap outcomes = this.model.getOutcomes();
+    private void processOutcomes() {
+        HashMap<String, Enum> outcomes = this.model.getOutcomes();
+        Set<String> winnerNames = new HashSet<>();
+        Set<String> loserNames = new HashSet<>();
+        Set<String> tieNames = new HashSet<>();
+        for (Map.Entry<String, Enum> entry : outcomes.entrySet()) {
+            if(entry.getValue().equals(Outcome.WIN)) {
+                winnerNames.add(entry.getKey());
+            }
+            else if(entry.getValue().equals((Outcome.LOSE))) {
+                loserNames.add(entry.getKey());
+            }
+            else if(entry.getValue().equals((Outcome.TIE))) {
+                tieNames.add(entry.getKey());
+            }
+        }
+        view.printResults(winnerNames, loserNames, tieNames);
     }
 
     private void quitGame() {
@@ -139,7 +161,7 @@ public class BlackJackController {
 
     public static void main(String[] args) {
         BlackJackController newGame = new BlackJackController();
-//        newGame.startGame();
+        newGame.startGame();
     }
 
 }
