@@ -62,6 +62,7 @@ public abstract class AbstractPlayer {
      * @return true if the currentHandValue is over 21, false otherwise
      */
     public boolean isOver21() {
+        calculateHandValue();
         return this.currentHandValue > BLACKJACK;
     }
 
@@ -100,7 +101,7 @@ public abstract class AbstractPlayer {
      */
     public void calculateHandValue() {
         this.currentHandValue = this.calculateHardHandValue();
-        if (this.isOver21())
+        if (this.currentHandValue > 21)
             this.currentHandValue = this.calculateSoftHandValue();
     }
 
