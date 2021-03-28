@@ -52,7 +52,7 @@ public class VisualHand {
     /**
      * This method creates visual card objects for each card in a hand.
      *
-     * @param visible a boolean True if the card information is visible, else false.
+     * @param visible a boolean true if the card information is visible, else false.
      */
     private void createVisualCardsFromHand(boolean visible) {
         visualCards[0] = new VisualCard(hand.getCard(0), visible);

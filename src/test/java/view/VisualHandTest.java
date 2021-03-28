@@ -15,7 +15,6 @@ public class VisualHandTest {
 
     @Before
     public void setUp() {
-        Deck deck = new Deck();
         Hand smallHand = new Hand();
         smallHand.add(new Card(Suit.DIAMONDS, Name.TWO));
         smallHand.add(new Card(Suit.CLUBS, Name.ACE));
@@ -36,35 +35,35 @@ public class VisualHandTest {
     @Test
     public void testToStringForTwoVisibleCards() {
         String expected = """
-             +-----+     +-----+     
-             |♢    |     |♣    |     
-             |  2  |     | Ace |     
-             |    ♢|     |    ♣|     
-             +-----+     +-----+     
-                        """;
+                +-----+     +-----+     
+                |♢    |     |♣    |     
+                |  2  |     | Ace |     
+                |    ♢|     |    ♣|     
+                +-----+     +-----+     
+                """;
         assertEquals(expected, blackjackHand.toString());
     }
 
     @Test
     public void testToStringForFiveVisibleCards() {
         String expected = """
-             +-----+     +-----+     +-----+     +-----+     +-----+
-             |♡    |     |♠    |     |♣    |     |♠    |     |♢    |
-             |Queen|     |King |     |  2  |     | Ace |     |  10 |
-             |    ♡|     |    ♠|     |    ♣|     |    ♠|     |    ♢|
-             +-----+     +-----+     +-----+     +-----+     +-----+
-                        """;
+                +-----+     +-----+     +-----+     +-----+     +-----+
+                |♡    |     |♠    |     |♣    |     |♠    |     |♢    |
+                |Queen|     |King |     |  2  |     | Ace |     |  10 |
+                |    ♡|     |    ♠|     |    ♣|     |    ♠|     |    ♢|
+                +-----+     +-----+     +-----+     +-----+     +-----+
+                """;
         assertEquals(expected, pokerHand.toString());
     }
 
     @Test
     public void testToStringForInvisibleCards() {
         String expected = """
-            +-----+     +-----+     
-            |XXXXX|     |XXXXX|     
-            |XXXXX|     |XXXXX|     
-            |XXXXX|     |XXXXX|     
-            +-----+     +-----+     
+                +-----+     +-----+     
+                |XXXXX|     |♣    |     
+                |XXXXX|     | Ace |     
+                |XXXXX|     |    ♣|     
+                +-----+     +-----+     
                 """;
         assertEquals(expected, dealerHand.toString());
     }
@@ -72,12 +71,12 @@ public class VisualHandTest {
     @Test
     public void testToStringForFiveInvisibleCards() {
         String expected = """
-             +-----+     +-----+     +-----+     +-----+     +-----+
-             |XXXXX|     |XXXXX|     |XXXXX|     |XXXXX|     |XXXXX|
-             |XXXXX|     |XXXXX|     |XXXXX|     |XXXXX|     |XXXXX|
-             |XXXXX|     |XXXXX|     |XXXXX|     |XXXXX|     |XXXXX|
-             +-----+     +-----+     +-----+     +-----+     +-----+
-                        """;
+                +-----+     +-----+     +-----+     +-----+     +-----+
+                |XXXXX|     |♠    |     |♣    |     |♠    |     |♢    |
+                |XXXXX|     |King |     |  2  |     | Ace |     |  10 |
+                |XXXXX|     |    ♠|     |    ♣|     |    ♠|     |    ♢|
+                +-----+     +-----+     +-----+     +-----+     +-----+
+                """;
         assertEquals(expected, invisiblePokerHand.toString());
     }
 }
