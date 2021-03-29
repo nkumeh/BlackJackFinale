@@ -27,7 +27,7 @@ public class AbstractPlayerTest {
     }
 
     @Test
-    public void testgetCurrentHandValueStartingHandValue() {
+    public void testGetCurrentHandValueStartingHandValue() {
         assertEquals(0, player1.getCurrentHandValue());
         assertEquals(19, player2.getCurrentHandValue());
         assertEquals(0, dealer.getCurrentHandValue());
@@ -51,6 +51,18 @@ public class AbstractPlayerTest {
         startingHand.add(new Card(Suit.CLUBS, Name.ACE));
         Player tempPlayer = new Player("Temp", startingHand);
         assertEquals(startingHand, tempPlayer.getHand());
+    }
+
+    @Test
+    public void testIsOver21() {
+        assertFalse(player2.isOver21());
+        player2.getHand().add(new Card(Suit.HEARTS, Name.TWO));
+        // value is 21
+        assertFalse(player2.isOver21());
+        player2.getHand().add(new Card(Suit.HEARTS, Name.TEN));
+        assertFalse(player2.isOver21());
+        player2.getHand().add(new Card(Suit.HEARTS, Name.FOUR));
+        assertTrue(player2.isOver21());
     }
 
     @Test

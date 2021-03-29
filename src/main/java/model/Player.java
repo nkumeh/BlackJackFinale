@@ -18,6 +18,17 @@ public class Player extends AbstractPlayer{
     }
 
     /**
+     * Player constructor calls Abstract constructor. Sets hand to the provided
+     * hand and calculates the currentHandValue.
+     * @param name the name of the Player
+     * @param dealtHand Hand object
+     */
+    public Player(String name, Hand dealtHand) {
+        super(dealtHand);
+        this.name = name;
+    }
+
+    /**
      * Returns the name of the player.
      * @return String
      */
@@ -34,15 +45,5 @@ public class Player extends AbstractPlayer{
         return this.getCurrentHandValue() == 21;
     }
 
-    /**
-     * Player constructor calls Abstract constructor. Sets hand to the provided
-     * hand and calculates the currentHandValue.
-     * @param name the name of the Player
-     * @param dealtHand Hand object
-     */
-    public Player(String name, Hand dealtHand) {
-        super(dealtHand);
-        this.name = name;
-    }
 
 }
