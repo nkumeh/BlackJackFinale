@@ -1,0 +1,27 @@
+Group 25
+Alexander Ivanoff
+Maria Piper
+Kristine Umeh
+
+For our Blackjack project, we had our first meeting on Friday the 12th of March.
+We set up our github repo and discussed he first part of the assignment where we were
+required to create a card class, deck class and a hand class.
+
+Alexander was responsible for the card class, Kristine was responsible for
+the deck class while, Maria was responsible for the hand class.
+
+We had a follow up meeting on the 19th of March to discuss the how to implement
+the Blackjack game using our classes for the second part of the assignment.
+
+For this second part, we decided to create an abstract player class;
+which serves as the parent class for our dealer and the players in the
+Array list, a model for the blackjack game and a controller view.
+
+Alexander was responsible for the abstract player, Maria was responsible
+for the controller view, and Kristine was responsible for the model.
+
+Each team member was also required to provide testing for all their class(es).
+
+Throughout the project, detailed feedback was always given and received
+promptly to ensure an effective and beneficial work flow. Adequate help
+was also given if requested.
