@@ -41,7 +41,7 @@ public class Hand extends Deck {
      * @return current handSize (an int).
      */
     public int getHandSize() {
-        return this.getDeck().size();
+        return this.size();
     }
 
     /**
