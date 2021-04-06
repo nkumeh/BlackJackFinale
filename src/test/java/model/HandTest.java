@@ -90,7 +90,4 @@ public class HandTest {
         newUnsortedHand.sort();
         assertEquals(newSortedHand.getDeck(), newUnsortedHand.getDeck());
     }
-
-
-
 }

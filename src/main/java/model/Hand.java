@@ -69,13 +69,12 @@ public class Hand extends Deck {
         Hand yourHand = new Hand(myLuckyDeck, handSize);
         for (int i = 0; i < handSize; i++) {
             assert(!myLuckyDeck.hasCard(myHand.getCard(i)));
-            assert(myHand.size() == i + 1);
+            assert(myHand.size() == handSize);
 
             assert(!myLuckyDeck.hasCard(yourHand.getCard(i)));
-            assert(yourHand.size() == i + 1);
+            assert(yourHand.size() == handSize);
         }
         assert(myLuckyDeck.size() == 42);
-
         // Prints the hands and the Decks
         myHand.printDeck();
         yourHand.printDeck();
