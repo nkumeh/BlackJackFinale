@@ -41,4 +41,15 @@ public class PlayerTest {
         assertTrue(player1.hasBlackjack());
     }
 
+    @Test
+    public void testHandValueWithTwoAces() {
+        assertFalse(player1.hasBlackjack());
+        player1.getHand().add(new Card(Suit.HEARTS, Name.ACE));
+        assertEquals(11, player1.getCurrentHandValue());
+        player1.getHand().add(new Card(Suit.DIAMONDS, Name.ACE));
+        assertEquals(12, player1.getCurrentHandValue());
+        player1.getHand().add(new Card(Suit.HEARTS, Name.NINE));
+        assertEquals(21, player1.getCurrentHandValue());
+        assertTrue(player1.hasBlackjack());
+    }
 }
