@@ -40,5 +40,4 @@ public class PlayerTest {
         player1.getHand().add(new Card(Suit.HEARTS, Name.ACE));
         assertTrue(player1.hasBlackjack());
     }
-
 }

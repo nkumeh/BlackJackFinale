@@ -119,7 +119,7 @@ public class VisualCard {
     }
 
     /**
-     * This private helper method formats the suit depending on the row
+     * This method formats the suit depending on the row
      * the suit is to be displayed in
      *
      * @param row the row to display the suit in. Valid rows are 1 and 3.
