@@ -9,7 +9,7 @@ public abstract class AbstractPlayer {
     public static final int BLACKJACK = 21;
 
     /**
-     * Constructor for an Abstract Player.
+     * Default constructor for an Abstract Player.
      */
     public AbstractPlayer() {
         this.hand = new Hand();
@@ -26,21 +26,21 @@ public abstract class AbstractPlayer {
     }
 
     /**
-     * Returns the currentHandValue.
-     * @return int - currentHandValue
-     */
-    public int getCurrentHandValue() {
-        this.calculateHandValue();
-        return this.currentHandValue;
-    }
-
-    /**
      * Returns the Hand object. Note that this returns a mutable Hand object,
      * because child classes should be able to change the Hand.
      * @return Hand object
      */
     public Hand getHand() {
         return this.hand;
+    }
+
+    /**
+     * Returns the currentHandValue.
+     * @return int - currentHandValue
+     */
+    public int getCurrentHandValue() {
+        this.calculateHandValue();
+        return this.currentHandValue;
     }
 
     /**

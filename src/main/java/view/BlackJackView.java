@@ -21,14 +21,15 @@ public class BlackJackView {
         String instructions = """
                 Welcome to the Game of BlackJack!
                             
-                Each player will receive two cards. The goal is to get as close to 21 points without going over. 
-                If you go over 21 points, you lose the game. 
-                Aces can be worth either 1 point or 11 points. 
+                Each player will receive two cards. The goal is to get as close to 21 points without going over.
+                If you go over 21 points, you lose the game.
+                Aces can be worth either 1 point or 11 points.
                 Press these keys + enter:
-                    - 'H' to hit and get another card from the dealer. 
+                    - 'H' to hit and get another card from the dealer.
                     - 'S' to stand and finish your turn.
-                    - 'Q' to quit the game. 
-                Are you ready to play? Press any key except 'Q' (+ enter) to get started!
+                    - 'Q' to quit the game.
+                Are you ready to play?
+                Press any key except 'Q' (+ enter) to get started!
                 """;
         print(instructions);
     }
@@ -85,7 +86,7 @@ public class BlackJackView {
      * @param playerName the name of the player whose turn it is.
      */
     public void printPlayerTurn(String playerName) {
-        print("*********************************************************");
+        print("*********************************************************\n");
         print(playerName + "'s Turn!");
     }
 
@@ -154,20 +155,18 @@ public class BlackJackView {
         print(options);
     }
 
+
     /**
      * This method outputs a message to start the game.
      */
     public void printStartGameDialog() {
         String letsPlay = """
-                 _      _   _             _             _ 
-                | |    | | ( )           | |           | |
-                | | ___| |_|/ ___   _ __ | | __ _ _   _| |
-                | |/ _ \\ __| / __| | '_ \\| |/ _` | | | | |
-                | |  __/ |_  \\__ \\ | |_) | | (_| | |_| |_|
-                |_|\\___|\\__| |___/ | .__/|_|\\__,_|\\__, (_)
-                                   | |             __/ |  
-                                   |_|            |___/   
-                            """;
+                                                           
+               ╦  ┌─┐┌┬┐┌─┐  ╔═╗┬  ┌─┐┬ ┬ ┬
+               ║  ├┤  │ └─┐  ╠═╝│  ├─┤└┬┘ │
+               ╩═╝└─┘ ┴ └─┘  ╩  ┴─┘┴ ┴ ┴  o
+                             
+                """;
         print(letsPlay);
     }
 
@@ -175,18 +174,15 @@ public class BlackJackView {
      * This method outputs a message when a player has a blackjack (hand of 21).
      */
     public void printPlayerBlackjackDialog() {
-        String blackjack = """
-                 _     _            _    _            _    _ 
-                | |   | |          | |  (_)          | |  | |
-                | |__ | | __ _  ___| | ___  __ _  ___| | _| |
-                | '_ \\| |/ _` |/ __| |/ / |/ _` |/ __| |/ / |
-                | |_) | | (_| | (__|   <| | (_| | (__|   <|_|
-                |_.__/|_|\\__,_|\\___|_|\\_\\ |\\__,_|\\___|_|\\_(_)
-                                       _/ |                  
-                                      |__/                   
+        String blackjack = """  
+                   
+                ╔╗ ┬  ┌─┐┌─┐┬┌─ ╦┌─┐┌─┐┬┌─ ┬
+                ╠╩╗│  ├─┤│  ├┴┐ ║├─┤│  ├┴┐ │
+                ╚═╝┴─┘┴ ┴└─┘┴ ┴╚╝┴ ┴└─┘┴ ┴ o
+                                                         
                 """;
         print(blackjack);
-        print("Congrats, you have Blackjack (or 21)!\n");
+        print("Congrats, you have Blackjack!\n");
     }
 
     /**
@@ -196,11 +192,11 @@ public class BlackJackView {
      */
     public void printPlayerBustDialog(Player player) {
         String bust = """
-                   | |             | |  
-                   | |__  _   _ ___| |_ 
-                   | '_ \\| | | / __| __|
-                   | |_) | |_| \\__ \\ |_ 
-                   |_.__/ \\__,_|___/\\__|
+                   
+               ╔╗ ┬ ┬┌─┐┌┬┐
+               ╠╩╗│ │└─┐ │
+               ╚═╝└─┘└─┘ ┴ o o o
+                    
                 """;
         print(bust);
         print("Whoops! " + player.getName() + " busted at " + player.getCurrentHandValue() + ".");
@@ -247,13 +243,12 @@ public class BlackJackView {
      */
     public void printGameOverDialog() {
         String gameOver = """
-                  _____                                                                               
-                 / ____|                                           
-                | |  __  __ _ _ __ ___   ___    _____   _____ _ __ 
-                | | |_ |/ _` | '_ ` _ \\ / _ \\  / _ \\ \\ / / _ \\ '__|
-                | |__| | (_| | | | | | |  __/ | (_) \\ V /  __/ |   
-                 \\_____|\\__,_|_| |_| |_|\\___|  \\___/ \\_/ \\___|_|             
-                          """;
+                               
+                ╔═╗  ┌─┐  ┌┬┐  ┌─┐  ╔═╗  ┬  ┬  ┌─┐  ┬─┐  ┬
+                ║ ╦  ├─┤  │││  ├┤   ║ ║  └┐┌┘  ├┤   ├┬┘  │
+                ╚═╝  ┴ ┴  ┴ ┴  └─┘  ╚═╝   └┘   └─┘  ┴└─  o
+                                                               
+                """;
         print(gameOver);
         print("********** Calculating the results **********\n");
     }
@@ -297,33 +292,25 @@ public class BlackJackView {
      */
     private String getASCIIArtForOutcome(String outcome) {
         String loser = """
-                     _                      __ __    
-                    | |                    / / \\ \\ _ 
-                    | | ___  ___  ___ _ __| |___| (_)
-                    | |/ _ \\/ __|/ _ \\ '__| / __| |  
-                    | | (_) \\__ \\  __/ |  | \\__ \\ |_ 
-                    |_|\\___/|___/\\___|_|  | |___/ (_)
-                                           \\_\\ /_/   
-                                                  
+                
+                ╦  ┌─┐┌─┐┌─┐┬─┐┌─┐
+                ║  │ │└─┐├┤ ├┬┘└─┐
+                ╩═╝└─┘└─┘└─┘┴└─└─┘ o o o
+                                                 
                 """;
         String tie = """
-                     _   _       __ __    
-                    | | (_)     / / \\ \\ _ 
-                    | |_ _  ___| |___| (_)
-                    | __| |/ _ \\ / __| |  
-                    | |_| |  __/ \\__ \\ |_ 
-                     \\__|_|\\___| |___/ (_)
-                                \\_\\ /_/   
+                   
+                ╔╦╗┬┌─┐┌─┐
+                 ║ │├┤ └─┐
+                 ╩ ┴└─┘└─┘
                                         
                 """;
         String winner = """
-                             _                        __ __    
-                            (_)                      / / \\ \\ _ 
-                   __      ___ _ __  _ __   ___ _ __| |___| (_)
-                   \\ \\ /\\ / / | '_ \\| '_ \\ / _ \\ '__| / __| |  
-                    \\ V  V /| | | | | | | |  __/ |  | \\__ \\ |_ 
-                     \\_/\\_/ |_|_| |_|_| |_|\\___|_|  | |___/ (_)
-                                                     \\_\\ /_/   
+        
+                ╦ ╦  ┬  ┌┐┌  ┌┐┌  ┌─┐  ┬─┐  ┌─┐  ┬
+                ║║║  │  │││  │││  ├┤   ├┬┘  └─┐  │
+                ╚╩╝  ┴  ┘└┘  ┘└┘  └─┘  ┴└─  └─┘  o
+                                                                     
                 """;
         return switch (outcome) {
             case "loser" -> loser;
